@@ -1,0 +1,28 @@
+#main {
+  .country, .time {
+    border: 1px solid $pink;
+    color: $pink;
+    border-radius: 500px;
+    -webkit-border-radius: 500px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    margin-right: 1rem;
+    span {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      transform: translateY(-50%);
+    }
+  }
+  .country {
+    width: 40px;
+    height: 40px;
+  }
+  .time {
+    margin-top: .2rem;
+    padding: .25rem 1.5rem;
+  }
+}
