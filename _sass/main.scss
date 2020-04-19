@@ -12,17 +12,36 @@ $blue: #06bcef;
 $pink: #fc3fff;
 $pink-invert: #fff;
 // Update the sans-serif font family
-$family-primary: 'Poppins', sans-serif;
-$family-sans-serif: "Helvetica", "Arial", sans-serif;
+$title-family: 'Cormorant', sans-serif;
+$title-weight: 500;
+$family-sans-serif: 'Poppins', sans-serif;
+
+$link: $black;
+$text: $black;
 
 // 3. Set the derived variables
 // Use the new pink as the primary color
 $primary: $pink;
 $primary-invert: $pink-invert;
 
+// 4. Mixins
+@mixin transform($property, $speed) {
+  -webkit-transition: $property $speed ease-in-out;
+  -moz-transition: $property $speed ease-in-out;
+  -ms-transition: $property $speed ease-in-out;
+  -o-transition: $property $speed ease-in-out;
+  transition: $property $speed ease-in-out;
+}
+
+@mixin rounded {
+  border-radius: 500px;
+  -webkit-border-radius: 500px;
+}
+
 // 4. Import the rest of Bulma
 @import "../node_modules/bulma/sass/utilities/_all.sass";
 @import "../node_modules/bulma/sass/base/_all.sass";
 @import "../node_modules/bulma/sass/grid/columns.sass";
 @import "../node_modules/bulma/sass/elements/container.sass";
+@import "../node_modules/bulma/sass/elements/title.sass";
 @import "custom-styles.scss"

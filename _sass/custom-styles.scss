@@ -1,9 +1,12 @@
-#main {
+#list-item {
+  padding-top: .5rem;
+  padding-bottom: .75rem;
+  border-bottom: 1px solid $grey-lighter;
   .country, .time {
-    border: 1px solid $pink;
-    color: $pink;
-    border-radius: 500px;
-    -webkit-border-radius: 500px;
+    border: 1px solid $grey;
+    color: $grey;
+    font-family: $title-family;
+    @include rounded;
     text-align: center;
     position: relative;
     display: inline-block;
@@ -17,12 +20,68 @@
       transform: translateY(-50%);
     }
   }
+  .mt-1 {
+    margin-top: .55rem;
+  }
+  .mt-2 {
+    margin-top: .75rem;
+  }
   .country {
-    width: 40px;
-    height: 40px;
+    font-size: 1.3rem;
+    line-height: 1;
+    width: 45px;
+    height: 45px;
   }
   .time {
-    margin-top: .2rem;
-    padding: .25rem 1.5rem;
+    margin-top: .55rem;
+    font-size: 1.5rem;
+    line-height: 0.8;
+    padding: 0 1.5rem .4rem;
+  }
+  .username {
+    display: inline-block;
+    width: auto;
+    margin-top: .35rem;
+    line-height: 1.6;
+    span {
+      padding-bottom: 0rem;
+      border-bottom: 1px solid rgba(lighten($grey-dark, 20%),0.5);
+      @include transform(all, 100ms);
+      &:hover {
+        padding-bottom: .05rem;
+        border-color: lighten($grey-dark, 20%);
+      }
+    }
+  }
+  .description {
+    padding-left: 0;
+    p {
+      font-size: 85%;
+    }
+  }
+  .btn {
+    background: $grey;
+    color: $white;
+    display: inline-block;
+    padding: .2rem 1.5rem;
+    @include rounded;
+    @include transform(background, 200ms);
+    &:hover {
+      background: darken($grey, 10%);
+    }
+    &.btn-dark {
+      background: $grey-dark;
+      &:hover {
+        background: darken($grey-dark, 10%);
+      }
+    }
+  }
+
+  // Live modifications
+  .is-live {
+    .country, .time {
+      border-color: $pink;
+      color: $pink;
+    }
   }
 }

@@ -45,8 +45,42 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
   <div class="container">
     <div class="columns">
       <div class="column is-11-desktop">
-        <div class="columns">
 
+        <?php
+
+        // $query = new WP_Query(
+        //   array(
+        //       'posts_per_page' => 10,
+        //       'post_status' => 'publish',
+        //       'post_type' => 'post',
+        //       'meta_key' => 'stream_time',
+        //       'orderby' => 'meta_value_num',
+        //       'order' => 'ASC'
+        //   )
+        // );
+
+        if ( have_posts() ) :
+          while ( have_posts() ) : the_post();
+            // get variables
+            $timestamp = get_post_meta(get_the_ID(), 'stream_time', true);
+            $title = get_the_title();
+            $name = get_post_meta(get_the_ID(), 'user_name', true);
+            $url = get_post_meta(get_the_ID(), 'stream_url', true);
+
+            $tags = '<div class="post-tags">';
+            $tagQuery = wp_get_post_tags(get_the_ID(), array('fields' => 'all'));
+            foreach ( $tagQuery as $tag ) {
+              $tag_link = get_tag_link( $tag->term_id );
+
+              $tags .= "<a href='{$tag_link}' title='{$tag->name} Tag' class='{$tag->slug}'>";
+              $tags .= "{$tag->name}</a>";
+            }
+            $tags .= '</div>';
+        ?>
+
+        <!-- START list item -->
+        <div id="list-item" class="columns is-live">
+          <!-- language / time column -->
           <div class="column is-4-desktop">
             <div class="columns">
               <div class="column is-6-desktop">
@@ -55,84 +89,53 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
                     <div class="country"><span>UK</span></div>
                   </div>
                   <div class="column is-8">
-                    <span class="time">19:30</span>
+                    <span class="time"><?php echo date("H:i", strtotime($timestamp)); ?></span>
                   </div>
                 </div>
               </div>
-              <div class="column is-6-desktop">
-                <a href="#" class="title">Inter / Access</a>
+              <div class="column is-6-desktop pt-1">
+                <a href="#" class="username title is-5"><span><?php echo $name ?></span></a>
               </div>
             </div>
           </div>
-
+          <!-- date / title column -->
           <div class="column is-4-desktop">
             <div class="columns">
-              <div class="column is-4-desktop">
-                <p>24 May</p>
+              <div class="column is-3-desktop">
+                <p class="mt-1 title is-5"><?php echo date("d-M", strtotime($timestamp)); ?></p>
               </div>
-              <div class="column is-8-desktop">
-                <p>A pretentious art title goes here</p>
-                <span class="category">Talk</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="column is-4-desktop">
-            <div class="columns">
               <div class="column is-9-desktop">
-                <p>Facilisis dignissim rutrum scelerisque dis morbi ante vehicula euismod sodales feugiat suspendisse nullam massa suspendisse a ipsum iaculis ullamcorper integer rutrum cras curae in cum urna.</p>
+                <p class="mt-1 title is-4"><?php echo $title ?></p>
+                <a href="#" class="btn">Talk</a>
               </div>
-              <div class="column is-3">
-                <a href="#" class="btn">Watch</a>
+            </div>
+          </div>
+          <!-- description / link column -->
+          <div class="column is-4-desktop">
+            <div class="columns">
+              <div class="column is-8-desktop description">
+                <p class="mt-1">Facilisis dignissim rutrum sceler isque dis morbi ante vehicula euismod sodales feugiat suspen disse nullam massa suspendisse suspen disse nullam massa.</p>
+              </div>
+              <div class="column is-4">
+                <a href="#" class="btn btn-dark mt-2">Watch</a>
               </div>
             </div>
           </div>
 
         </div>
+        <!-- END list item -->
+
+        <?php
+            endwhile;
+          endif;
+
+          // wp_reset_query();
+        ?>
+
       </div>
     </div>
   </div>
 </section>
-
-<table>
-  <tr>
-    <th>Date</th>
-    <th>Title</th>
-    <th>Name</th>
-    <th>Tags</th>
-    <th>URL</th>
-  </tr>
-<?php
-if ( have_posts() ) :
-    while ( have_posts() ) : the_post();
-      // get variables
-      $time = get_post_meta(get_the_ID(), 'stream_time', true);
-      $title = get_the_title();
-      $name = get_post_meta(get_the_ID(), 'user_name', true);
-      $url = get_post_meta(get_the_ID(), 'stream_url', true);
-
-      $tags = '<div class="post-tags">';
-      $tagQuery = wp_get_post_tags(get_the_ID(), array('fields' => 'all'));
-      foreach ( $tagQuery as $tag ) {
-        $tag_link = get_tag_link( $tag->term_id );
-
-        $tags .= "<a href='{$tag_link}' title='{$tag->name} Tag' class='{$tag->slug}'>";
-        $tags .= "{$tag->name}</a>";
-      }
-      $tags .= '</div>';
-
-      // print that shit to table
-      echo '<tr>';
-        echo '<td>' . $time . '</td>';
-        echo '<td>' . $title . '</td>';
-        echo '<td>' . $name . '</td>';
-        echo '<td>' . $tags . '</td>';
-        echo '<td>' . '<a href="' . $url . '">' . $url . '</a>' . '</td>';
-      echo '</tr>';
-    endwhile;
-endif;
-?>
-</table>
 
 <hr>
 
