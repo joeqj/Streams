@@ -17,7 +17,7 @@ function listing_form_meta_box($post) {
 
 add_filter( 'pre_get_posts', 'modify_search_results_order', 10, 2 );
 
-function modify_search_results_order( $query ) {
+function modify_search_results_order($query) {
   if ( ! $query->is_main_query() || is_admin() || ! is_search() ) {
     return $query;
   }
