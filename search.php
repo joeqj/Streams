@@ -9,7 +9,7 @@ while ( have_posts() ) : the_post();
 else :
   ?>
     <div class="search-error">
-      <p class="title">Sorry we've found nothing for that search!</p>
+      <p class="title">Sorry no upcoming streams!</p>
     </div>
   <?php
 endif;

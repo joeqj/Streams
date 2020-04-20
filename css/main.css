@@ -2215,6 +2215,9 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   margin-top: .75rem;
   margin-bottom: 5rem; }
 
+#upcoming-posts {
+  margin-top: .75rem; }
+
 #list-item {
   padding: 1rem;
   border-bottom: 1px solid #dbdbdb; }
@@ -2355,7 +2358,14 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   width: 100%; }
   .pushy .menu-tags a {
     font-family: "Cormorant", sans-serif;
-    font-size: 1.5rem; }
+    font-size: 1.5rem;
+    -webkit-transition: color 150ms ease-in-out;
+    -moz-transition: color 150ms ease-in-out;
+    -ms-transition: color 150ms ease-in-out;
+    -o-transition: color 150ms ease-in-out;
+    transition: color 150ms ease-in-out; }
+    .pushy .menu-tags a.active {
+      color: #fc3fff; }
   .pushy .menu-tags .float-left {
     float: left; }
   .pushy .menu-tags .float-right {

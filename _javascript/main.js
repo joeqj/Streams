@@ -57,8 +57,17 @@ $('#searchfield').on("change paste keyup", function(e){
 
 $(".menu-tags a").on("click", function(e) {
   e.preventDefault();
+  $(".menu-tags a").not($(this)).removeClass('active');
   console.log($(this).attr("href"));
-  $.get( $(this).attr("href"), function( data ){
-      $('#upcoming-posts').html(data);
-  });
+  if (!$(this).hasClass("active")) {
+    $(this).addClass("active");
+    $.get( $(this).attr("href"), function( data ){
+        $('#upcoming-posts').html(data);
+    });
+  } else {
+    $(this).removeClass("active");
+    $.get( '/', { s: "" }, function( data ){
+        $('#upcoming-posts').html(data);
+    });
+  }
 });

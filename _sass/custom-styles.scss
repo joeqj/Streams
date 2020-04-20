@@ -23,6 +23,10 @@
   margin-bottom: 5rem;
 }
 
+#upcoming-posts {
+  margin-top: .75rem;
+}
+
 #list-item {
   padding: 1rem;
   @media (min-width: 768px) {
@@ -192,6 +196,10 @@
     a {
       font-family: $title-family;
       font-size: 1.5rem;
+      @include transform(color, 150ms);
+      &.active {
+        color: $primary;
+      }
     }
     .float-left {
       float: left;
