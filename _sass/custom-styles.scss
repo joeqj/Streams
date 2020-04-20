@@ -1,11 +1,38 @@
+.btn {
+  background: $grey;
+  color: $white;
+  display: inline-block;
+  padding: .2rem .75rem;
+  @include rounded;
+  @include transform(background, 200ms);
+  &:hover {
+    background: darken($grey, 10%);
+    color: $white;
+  }
+  &.btn-dark {
+    background: $grey-dark;
+    &:hover {
+      background: darken($grey-dark, 10%);
+      color: $white;
+    }
+  }
+}
+
+#main {
+  margin-top: .75rem;
+  margin-bottom: 5rem;
+}
+
 #list-item {
-  padding-top: .5rem;
-  padding-bottom: .75rem;
+  padding: 1rem;
+  @media (min-width: 768px) {
+    padding: .5rem 0 .75rem 0;
+  }
   border-bottom: 1px solid $grey-lighter;
   .country, .time {
     border: 1px solid $grey;
     color: $grey;
-    font-family: $title-family;
+    // font-family: $title-family;
     @include rounded;
     text-align: center;
     position: relative;
@@ -21,10 +48,14 @@
     }
   }
   .mt-1 {
-    margin-top: .55rem;
+    @media (min-width: 768px) {
+      margin-top: .55rem;
+    }
   }
   .mt-2 {
-    margin-top: .75rem;
+    @media (min-width: 768px) {
+      margin-top: .75rem;
+    }
   }
   .country {
     font-size: 1.3rem;
@@ -33,10 +64,11 @@
     height: 45px;
   }
   .time {
+    position: relative;
     margin-top: .55rem;
-    font-size: 1.5rem;
-    line-height: 0.8;
-    padding: 0 1.5rem .4rem;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    padding: 0 1.5rem;
   }
   .username {
     display: inline-block;
@@ -53,35 +85,188 @@
       }
     }
   }
+  .item-title {
+    display: inline-block;
+  }
   .description {
-    padding-left: 0;
+    @media (min-width: 768px) {
+      padding-left: 0;
+    }
     p {
       font-size: 85%;
     }
   }
-  .btn {
-    background: $grey;
-    color: $white;
-    display: inline-block;
-    padding: .2rem 1.5rem;
-    @include rounded;
-    @include transform(background, 200ms);
-    &:hover {
-      background: darken($grey, 10%);
+  // Live modifications
+  &.is-live {
+    .country, .time {
+      border-color: $primary !important;
+      color: $primary;
     }
-    &.btn-dark {
-      background: $grey-dark;
-      &:hover {
-        background: darken($grey-dark, 10%);
+    .time {
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: .4rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        background: $primary;
+        @include rounded;
       }
     }
   }
+  &.archive {
+    opacity: 0.5;
+    text-decoration: line-through;
+    .country, .time, .username {
+      text-decoration: line-through;
+    }
+  }
+}
 
-  // Live modifications
-  .is-live {
-    .country, .time {
-      border-color: $pink;
-      color: $pink;
+.archive-fade {
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&1+0,0+100 */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+  }
+}
+
+.search-btn {
+  color: $blue;
+  display: block;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 9999999;
+  outline: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover {
+    color: darken($primary, 25%);
+  }
+  &.active {
+    opacity: 0.7;
+  }
+}
+
+.search-error {
+  margin-top: 3rem;
+}
+
+.pushy {
+  form {
+    &.menu-search {
+      input {
+        width: 100%;
+        outline: none;
+        font-size: 1.2rem;
+        border: none;
+        background: transparent;
+        border-bottom: 1px solid $grey-lighter;
+        font-family: $title-family;
+      }
+    }
+  }
+  .menu-categories {
+    margin-top: 3rem;
+    a {
+      margin-right: .5rem;
+      margin-bottom: .5rem;
+    }
+  }
+  .menu-tags {
+    margin-top: 3rem;
+    width: 100%;
+    a {
+      font-family: $title-family;
+      font-size: 1.5rem;
+    }
+    .float-left {
+      float: left;
+    }
+    .float-right {
+      float: right;
+    }
+  }
+}
+
+.form-bar {
+  position: fixed;
+  background: $white;
+  border: 2px $primary solid;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  width: calc(100% - 1rem);
+  bottom: .5rem;
+  left: .5rem;
+  right: .5rem;
+  opacity: 1;
+  visibility: visible;
+  @include transform(opacity, 350ms);
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .columns {
+    &.m-0 {
+      margin: 0;
+    }
+  }
+  .column {
+    &.pl-0 {
+      padding-left: .25rem;
+    }
+  }
+  #js-expand {
+    color: $primary;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 0.5;
+    display: inline-block;
+    margin-top: .35rem;
+    position: absolute;
+    left: -2rem;
+    @include transform(color, 120ms);
+    &:hover {
+      color: darken($primary, 20%);
+    }
+  }
+  input, textarea {
+    border: none;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    box-shadow: none;
+    width: 100%;
+    -webkit-appearance: none;
+    border-bottom: 1px solid $grey-lighter;
+    &:focus {
+      box-shadow: none;
+      -webkit-appearance: none;
+    }
+  }
+  button {
+    cursor: pointer;
+    font-size: 1.2rem;
+    float: right;
+    margin-bottom: 1rem;
+  }
+  .js-hidden-form {
+    display: none;
+    padding-top: .5rem;
+    input {
+      margin: 1rem 0;
     }
   }
 }

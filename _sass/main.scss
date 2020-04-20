@@ -7,7 +7,7 @@
 
 // 2. Set your own initial variables
 // Update the blue shade, used for links
-$blue: #06bcef;
+$blue: #4169e1;
 // Add pink and its invert
 $pink: #fc3fff;
 $pink-invert: #fff;
@@ -44,4 +44,5 @@ $primary-invert: $pink-invert;
 @import "../node_modules/bulma/sass/grid/columns.sass";
 @import "../node_modules/bulma/sass/elements/container.sass";
 @import "../node_modules/bulma/sass/elements/title.sass";
-@import "custom-styles.scss"
+@import "custom-styles.scss";
+@import "pushy.scss"

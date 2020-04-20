@@ -15,4 +15,22 @@ function listing_form_meta_box($post) {
     echo "<p>Stream Language: " . get_post_meta($post->ID, 'stream_language', true) . "</p>";
 }
 
+add_filter( 'pre_get_posts', 'modify_search_results_order', 10, 2 );
+
+function modify_search_results_order( $query ) {
+  if ( ! $query->is_main_query() || is_admin() || ! is_search() ) {
+    return $query;
+  }
+  $query->query_vars['order'] = 'ASC';
+  $query->query_vars['orderby']    = 'meta_value';
+  $query->query_vars['meta_query'] = [
+    array(
+      'key'   => 'stream_time',
+      'value' => date('Ymd'),
+      'compare' => '<='
+    )
+  ];
+  return $query;
+}
+
 ?>
