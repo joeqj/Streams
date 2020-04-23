@@ -169,47 +169,6 @@
   margin-top: 3rem;
 }
 
-.pushy {
-  form {
-    &.menu-search {
-      input {
-        width: 100%;
-        outline: none;
-        font-size: 1.2rem;
-        border: none;
-        background: transparent;
-        border-bottom: 1px solid $grey-lighter;
-        font-family: $title-family;
-      }
-    }
-  }
-  .menu-categories {
-    margin-top: 3rem;
-    a {
-      margin-right: .5rem;
-      margin-bottom: .5rem;
-    }
-  }
-  .menu-tags {
-    margin-top: 3rem;
-    width: 100%;
-    a {
-      font-family: $title-family;
-      font-size: 1.5rem;
-      @include transform(color, 150ms);
-      &.active {
-        color: $primary;
-      }
-    }
-    .float-left {
-      float: left;
-    }
-    .float-right {
-      float: right;
-    }
-  }
-}
-
 .bottom-bar {
   position: fixed;
   background: $white;
@@ -217,7 +176,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 99999999;
+  z-index: 999;
   .navigation {
     text-align: center;
     background: $white;
@@ -250,6 +209,9 @@
         &.active {
           background: $primary;
           color: $white;
+        }
+        &#create-listing {
+          text-transform: uppercase;
         }
       }
     }
@@ -317,8 +279,15 @@
     width: 100%;
     -webkit-appearance: none;
     border-bottom: 1px solid $primary;
+    @include transform(border-color, 250ms);
+    &.error {
+      border-color: $red;
+    }
     &:focus {
       outline: none;
+    }
+    &[type=time] {
+      padding: .35rem 0;
     }
   }
   textarea {
@@ -329,6 +298,44 @@
     max-width: 100%;
     min-height: 120px;
     max-height: 120px;
+  }
+  select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border: none;
+    font-size: 1rem;
+    padding: .5rem 0;
+    margin-bottom: 1rem;
+    box-shadow: none;
+    width: 100%;
+    -webkit-appearance: none;
+    border-bottom: 1px solid $primary;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    background: $white;
+    background-image:
+    linear-gradient(45deg, transparent 50%, $primary 50%),
+    linear-gradient(135deg, $primary 50%, transparent 50%);
+    background-position:
+      calc(100% - 10px) calc(0.9em + 2px),
+      calc(100% - 5px) calc(0.9em + 2px);
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+    @include transform(border-color, 250ms);
+    &:invalid, [disabled] {
+      color: $white;
+    }
+    &:focus {
+      outline: none;
+    }
+    &.error {
+      border-color: $red;
+    }
   }
   button {
     @include rounded;
@@ -343,6 +350,9 @@
       background: $primary;
       color: $white;
     }
+  }
+  label.error {
+    color: $red;
   }
 }
 

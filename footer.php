@@ -11,38 +11,7 @@
   </div>
 
   <!-- START Listing Form -->
-  <div class="js-listing-form">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-3">
-          <input type="text" class="form-bar-user" name="user_name" placeholder="Host" autocomplete="off" required>
-          <input type="text" name="user_email" placeholder="Your Email" autocomplete="off" required>
-          <input type="text" name="event_city" placeholder="City">
-          <input type="text" name="event_country" placeholder="Country">
-        </div>
-        <div class="column is-5">
-          <input type="text" name="stream_title" placeholder="Event Name" required>
-          <div class="columns datetimecol">
-            <div class="column is-3">
-              <input type="text" name="time" placeholder="19 : 00">
-            </div>
-            <div class="column is-4">
-              <input type="text" name="event_datetime" placeholder="11/05/<?php echo date("Y"); ?>" required>
-            </div>
-            <div class="column is-5">
-              <input type="text" name="" placeholder="Event Type">
-            </div>
-          </div>
-          <input type="text" name="stream_url" placeholder="Stream URL" autocomplete="off" required>
-          <input type="text" name="stream_language" placeholder="Event Language" required>
-        </div>
-        <div class="column is-4">
-          <textarea name="description" rows="6" placeholder="Tell us about your event"></textarea>
-          <button type="submit">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <?php get_template_part( 'template-parts/form', 'listing' ); ?>
 
   <!-- START Search -->
   <div class="js-search">
@@ -87,8 +56,10 @@
 </div>
 
 <?php wp_footer(); ?>
-<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/918d6a503e.js" crossorigin="anonymous"></script>
+<script src="//code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/node_modules/jquery-timepicker/jquery.timepicker.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/node_modules/@chenfengyuan/datepicker/dist/datepicker.min.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/lib/main.js?=<?=time();?>"></script>
 </body>
 </html>

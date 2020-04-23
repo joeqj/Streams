@@ -2,36 +2,35 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('What u doing looking here');
 });
 
-var searchOpen = false;
 var formOpen = false;
-
-$(".search-btn").on('click', function() {
-  $(this).html($(this).html() == 'close' ? 'search' : 'close');
-  if (!$(".form-bar").hasClass("hidden")) {
-    $(".form-bar").addClass("hidden");
-  } else {
-    $(".form-bar").removeClass("hidden");
-  }
-  searchOpen = !searchOpen;
-});
+var searchOpen = false;
 
 $(document).keydown(function(e) {
   if (e.keyCode === 27) {
-    if (searchOpen === true) {
-      $(".search-btn").html("search");
-      $(".form-bar").removeClass("hidden");
-      searchOpen = !searchOpen;
-    }
+
   }
 });
 
 $("#create-listing").click(function(e) {
   e.preventDefault();
+  var scroll = window.pageYOffset
   if (formOpen === false) {
+    $(document).bind('scroll',function () {
+      window.scrollTo(0, scroll);
+    });
     $(this).addClass("active");
     $(".js-listing-form").slideDown();
     $(".marquee").addClass("invert");
+    $('input.timepicker').timepicker({
+      timeFormat: "hh:mm p",
+      zindex: 1001,
+      startTime: new Date(0,0,0,19,0,0)
+    });
+    $('input.datepicker').datepicker({
+      inline: false
+    });
   } else {
+    $(document).unbind('scroll');
     $(this).removeClass("active");
     $(".js-listing-form").slideUp();
     $(".marquee").removeClass("invert");
@@ -39,10 +38,48 @@ $("#create-listing").click(function(e) {
   formOpen = !formOpen;
 });
 
-$(".form-bar input").focus(function(e) {
-  $(".js-hidden-form").slideDown();
-  $("#js-expand").html("-");
-});
+$("form[name='listing-form']").validate({   //#register-form is form id
+     // Specify the validation rules
+     rules: {
+         event_host: "required", //firstname is corresponding input name
+         event_email: {               //email is corresponding input name
+             required: true,
+             email: true
+         },
+         event_country: "required",
+         event_title: "required",
+         event_time: "required",
+         event_datetime: "required",
+         event_type: "required",
+         event_url: "required",
+         event_language: "required",
+         event_description: "required"
+     },
+     // Specify the validation error messages
+     messages: {
+         event_host: "Host",
+         event_email: "Your Email",
+         event_country: "City",
+         event_title: "Event Name",
+         event_time: "19:00",
+         event_datetime: "11/05/2020",
+         event_type: "Event Type",
+         event_url: "Stream URL",
+         event_language: "Event Language",
+         event_description: "Tell us about your event"
+     },
+     errorPlacement: function (error, element) {
+    element.attr("placeholder", error[0].outerText);
+},
+     submitHandler: function(form) {
+         form.submit();
+     }
+ });
+
+
+
+
+// SEARCH AJAX BELOW
 
 $('#searchfield').on("change paste keyup", function(e){
   if ($(this).val().length >= 3) {
