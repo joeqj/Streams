@@ -2,33 +2,43 @@
 
 <?php
 
+$today = date('dmY');
+
 // handle listing create form
 if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
   // get fields
-  $name = $_POST['user_name'];
-  $email =  $_POST['user_email'];
+  $host = $_POST['event_host'];
+  $email =  $_POST['event_email'];
+  $city = $_POST['event_city'];
+  $country = $_POST['event_country'];
   $ip = $_SERVER['REMOTE_ADDR'];
 
   $datetime = $_POST['stream_datetime'];
 
-  $url =  $_POST['stream_url'];
-  $title =  $_POST['stream_title'];
-  $language = $_POST['stream_language'];
-  $tags =  $_POST['tags'];
-  $description =  $_POST['description'];
+  $title =  $_POST['event_name'];
+  $url =  $_POST['event_url'];
+  $language = $_POST['event_language'];
+  $time = $_POST['event_time'];
+  $date = $_POST['event_date'];
+  $description =  $_POST['event_description'];
+
+  $category = $_POST['event_type'];
 
   // Add the content of the form to $post as an array
   $post_information = array(
       'post_title'    => $title,
       'post_content'  => '<!-- wp:paragraph -->' . $description .'<!-- /wp:paragraph -->',
-      'tags_input'    => explode(', ', $tags),
+      'post_category' => $category,
       'meta_input' => array(
-                        'user_name' => $name,
+                        'event_host' => $host,
                         'user_email' => $email,
                         'user_ip' => $ip,
-                        'stream_time' => $datetime,
-                        'stream_url' => $url,
-                        'stream_language' => $language,
+                        'event_url' => $url,
+                        'event_city' => $city,
+                        'event_country' => $country,
+                        'event_time' => $time,
+                        'event_date' => $date,
+                        'event_language' => $language
                       ),
       'post_type' => 'post',
       'post_status'   => 'pending'
@@ -40,73 +50,66 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
 ?>
 
 <section id="main">
-  <div class="container">
-    <div class="columns">
-      <div class="column is-11-desktop">
-        <div class="archive-fade">
-          <?php
-            $today = date('Ymd');
-            $query = new WP_Query(
+  <div class="archive-fade">
+    <?php
+      $query = new WP_Query(
+        array(
+          'posts_per_page' => 2,
+          'post_status' => 'publish',
+          'meta_key' => 'event_date',
+          'orderby' => 'meta_value',
+          'order' => 'ASC',
+          'meta_query' => array(
               array(
-                'posts_per_page' => 2,
-                'post_status' => 'publish',
-                'meta_key' => 'stream_time',
-                'orderby' => 'meta_value',
-                'order' => 'ASC',
-                'meta_query' => array(
-                    array(
-                        'key' => 'stream_time',
-                        'value' => $today, // date format error
-                        'compare' => '<='
-                    )
-                 )
-               )
-            );
+                  'key' => 'event_date',
+                  'value' => $today, // date format error
+                  'compare' => '<='
+              )
+           )
+         )
+      );
 
-            if ( $query->have_posts() ) :
-            while ( $query->have_posts() ) : $query->the_post();
+      if ( $query->have_posts() ) :
+      while ( $query->have_posts() ) : $query->the_post();
 
-                get_template_part( 'template-parts/items', 'archive' );
+          get_template_part( 'template-parts/items', 'archive' );
 
-              endwhile;
-            endif;
+        endwhile;
+      endif;
 
-            wp_reset_postdata();
-          ?>
-        </div>
-        <div id="upcoming-posts">
-          <?php
-            $today = date('Ymd');
-            $query = new WP_Query(
+      wp_reset_postdata();
+    ?>
+  </div>
+  <div id="upcoming-posts">
+    <?php
+      $query = new WP_Query(
+        array(
+          'posts_per_page' => 10,
+          'post_status' => 'publish',
+          'meta_key' => 'event_date',
+          'orderby' => 'meta_value',
+          'order' => 'ASC',
+          'meta_query' => array(
               array(
-                'posts_per_page' => 10,
-                'post_status' => 'publish',
-                'meta_key' => 'stream_time',
-                'orderby' => 'meta_value',
-                'order' => 'ASC',
-                'meta_query' => array(
-                    array(
-                        'key' => 'stream_time',
-                        'value' => $today, // date format error
-                        'compare' => '<='
-                    )
-                 )
-               )
-            );
+                  'key' => 'event_date',
+                  'value' => $today, // date format error
+                  'compare' => '>='
+              )
+           )
+         )
+      );
 
-            if ( $query->have_posts() ) :
-            while ( $query->have_posts() ) : $query->the_post();
+      if ( $query->have_posts() ) :
+      while ( $query->have_posts() ) : $query->the_post();
 
-                get_template_part( 'template-parts/items', 'upcoming' );
+          get_template_part( 'template-parts/items', 'upcoming' );
 
-              endwhile;
-            endif;
+        endwhile;
+      endif;
 
-            wp_reset_postdata();
-          ?>
-        </div>
-      </div>
-    </div>
+      wp_reset_postdata();
+    ?>
+  </div>
   </div>
 </section>
 

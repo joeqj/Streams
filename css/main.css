@@ -2244,7 +2244,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   color: #222;
   display: block;
   padding: 0.2em 0.4em;
-  text-decoration: none; }
+  text-decoration: none;
+  font-family: "Fira Mono", monospace; }
 
 .ui-timepicker-standard .ui-state-hover {
   /* overwrites .ui-state-hover */
@@ -2296,7 +2297,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
 
 #main {
   margin-top: .75rem;
-  margin-bottom: 5rem; }
+  margin-bottom: 5rem;
+  overflow: hidden; }
 
 #upcoming-posts {
   margin-top: .75rem; }
@@ -2306,7 +2308,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   border-bottom: 1px solid #dbdbdb; }
   @media (min-width: 768px) {
     #list-item {
-      padding: .5rem 0 .75rem 0; } }
+      padding: .5rem 1rem .75rem; } }
   #list-item .country, #list-item .time {
     border: 1px solid #7a7a7a;
     color: #7a7a7a;

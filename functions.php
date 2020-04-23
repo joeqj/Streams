@@ -7,12 +7,15 @@ function add_listing_details_meta() {
 }
 
 function listing_form_meta_box($post) {
-    echo "<p>User Name: " . get_post_meta($post->ID, 'user_name', true) . "</p>";
-    echo "<p>User Email: " . get_post_meta($post->ID, 'user_email', true) . "</p>";
+    echo "<p>Host: " . get_post_meta($post->ID, 'event_host', true) . "</p>";
+    echo "<p>Email: " . get_post_meta($post->ID, 'user_email', true) . "</p>";
     echo "<p>User IP: " . get_post_meta($post->ID, 'user_ip', true) . "</p>";
-    echo "<p>Stream Time: " . get_post_meta($post->ID, 'stream_time', true) . "</p>";
-    echo "<p>Stream URL: " . get_post_meta($post->ID, 'stream_url', true) . "</p>";
-    echo "<p>Stream Language: " . get_post_meta($post->ID, 'stream_language', true) . "</p>";
+    echo "<p>City: " . get_post_meta($post->ID, 'event_city', true) . "</p>";
+    echo "<p>Country: " . get_post_meta($post->ID, 'event_country', true) . "</p>";
+    echo "<p>Event URL: " . get_post_meta($post->ID, 'event_url', true) . "</p>";
+    echo "<p>Event Time: " . get_post_meta($post->ID, 'event_time', true) . "</p>";
+    echo "<p>Stream Date: " . get_post_meta($post->ID, 'event_date', true) . "</p>";
+    echo "<p>Stream Language: " . get_post_meta($post->ID, 'event_language', true) . "</p>";
 }
 
 add_filter( 'pre_get_posts', 'modify_search_results_order', 10, 2 );

@@ -3,10 +3,10 @@
   <!-- START Marquee -->
   <div class="marquee">
     <div class="left">
-      <span> *** Todays Supply *** World Lockdown Livestreams Son!&nbsp;</span>
+      <span> *** Todays Supply *** World Lockdown Livestreams&nbsp;</span>
     </div>
     <div class="right">
-      <span> *** Todays Supply *** World Lockdown Livestreams Son!&nbsp;</span>
+      <span> *** Todays Supply *** World Lockdown Livestreams&nbsp;</span>
     </div>
   </div>
 
@@ -60,6 +60,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/node_modules/jquery-timepicker/jquery.timepicker.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/node_modules/@chenfengyuan/datepicker/dist/datepicker.min.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/dateformat.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/lib/main.js?=<?=time();?>"></script>
 </body>
 </html>

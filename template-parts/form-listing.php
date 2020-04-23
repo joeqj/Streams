@@ -1,10 +1,10 @@
 <div class="js-listing-form">
   <div class="container">
-    <form name="listing-form" action="index.html" method="post">
+    <form name="listing-form" action="" method="post">
       <div class="columns">
         <div class="column is-3">
-          <input type="text" class="form-bar-user" name="event_host" placeholder="Host" autocomplete="off" required>
-          <input type="text" name="event_email" placeholder="Your Email" autocomplete="off" required>
+          <input type="text" name="event_host" placeholder="Host" required>
+          <input type="text" name="event_email" placeholder="Your Email" required>
           <input type="text" name="event_city" placeholder="City">
           <select name="event_country">
             <option disabled selected hidden>Country</option>
@@ -261,13 +261,13 @@
           </select>
         </div>
         <div class="column is-5">
-          <input type="text" name="event_title" placeholder="Event Name" required>
+          <input type="text" name="event_name" placeholder="Event Name">
           <div class="columns datetimecol">
             <div class="column is-3">
-              <input type="text" class="timepicker" placeholder="19:00" name="event_time">
+              <input type="text" class="timepicker" placeholder="07:00 PM" name="event_time" autocomplete="off">
             </div>
             <div class="column is-4">
-              <input type="text" class="datepicker" name="event_datetime" placeholder="<?php echo date("d/m/Y"); ?>" required>
+              <input type="text" class="datepicker" name="event_date" placeholder="<?php echo date("d/m/Y"); ?>" autocomplete="off">
             </div>
             <div class="column is-5">
               <select name="event_type">

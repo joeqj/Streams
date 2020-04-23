@@ -21,6 +21,7 @@
 #main {
   margin-top: .75rem;
   margin-bottom: 5rem;
+  overflow: hidden;
 }
 
 #upcoming-posts {
@@ -30,7 +31,7 @@
 #list-item {
   padding: 1rem;
   @media (min-width: 768px) {
-    padding: .5rem 0 .75rem 0;
+    padding: .5rem 1rem .75rem;
   }
   border-bottom: 1px solid $grey-lighter;
   .country, .time {

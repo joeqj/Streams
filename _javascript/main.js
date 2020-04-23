@@ -27,7 +27,8 @@ $("#create-listing").click(function(e) {
       startTime: new Date(0,0,0,19,0,0)
     });
     $('input.datepicker').datepicker({
-      inline: false
+      inline: false,
+      format: 'dd/mm/yyyy'
     });
   } else {
     $(document).unbind('scroll');
@@ -47,9 +48,9 @@ $("form[name='listing-form']").validate({   //#register-form is form id
              email: true
          },
          event_country: "required",
-         event_title: "required",
+         event_name: "required",
          event_time: "required",
-         event_datetime: "required",
+         event_date: "required",
          event_type: "required",
          event_url: "required",
          event_language: "required",
@@ -59,10 +60,10 @@ $("form[name='listing-form']").validate({   //#register-form is form id
      messages: {
          event_host: "Host",
          event_email: "Your Email",
-         event_country: "City",
-         event_title: "Event Name",
-         event_time: "19:00",
-         event_datetime: "11/05/2020",
+         event_country: "Country",
+         event_name: "Event Name",
+         event_time: "07:00 PM",
+         event_date: dateFormat(new Date(), "dd/mm/yyyy"),
          event_type: "Event Type",
          event_url: "Stream URL",
          event_language: "Event Language",
@@ -75,9 +76,6 @@ $("form[name='listing-form']").validate({   //#register-form is form id
          form.submit();
      }
  });
-
-
-
 
 // SEARCH AJAX BELOW
 
