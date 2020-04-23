@@ -1,0 +1,12 @@
+@mixin transform($property, $speed) {
+  -webkit-transition: $property $speed ease-in-out;
+  -moz-transition: $property $speed ease-in-out;
+  -ms-transition: $property $speed ease-in-out;
+  -o-transition: $property $speed ease-in-out;
+  transition: $property $speed ease-in-out;
+}
+
+@mixin rounded {
+  border-radius: 500px;
+  -webkit-border-radius: 500px;
+}

@@ -60,7 +60,7 @@ $tags .= '</div>';
         <p class="mt-1"><?php echo the_content(); ?></p>
       </div>
       <div class="column is-4">
-        <a href="#" class="btn btn-dark mt-2">Watch</a>
+        <a href="<?php echo $url ?>" target="_blank" class="btn btn-dark mt-2">Watch</a>
       </div>
     </div>
   </div>

@@ -1,61 +1,93 @@
-</div>
+<div class="bottom-bar">
 
-<div class="form-bar">
-  <div class="container">
-    <form id="create_listing" class="create_listing" method="post" action="">
-      <div class="columns m-0">
-        <div class="column is-11-desktop">
-          <div class="columns is-mobile">
+  <!-- START Marquee -->
+  <div class="marquee">
+    <div class="left">
+      <span> *** Todays Supply *** World Lockdown Livestreams Son!&nbsp;</span>
+    </div>
+    <div class="right">
+      <span> *** Todays Supply *** World Lockdown Livestreams Son!&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- START Listing Form -->
+  <div class="js-listing-form">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-3">
+          <input type="text" class="form-bar-user" name="user_name" placeholder="Host" autocomplete="off" required>
+          <input type="text" name="user_email" placeholder="Your Email" autocomplete="off" required>
+          <input type="text" name="event_city" placeholder="City">
+          <input type="text" name="event_country" placeholder="Country">
+        </div>
+        <div class="column is-5">
+          <input type="text" name="stream_title" placeholder="Event Name" required>
+          <div class="columns datetimecol">
+            <div class="column is-3">
+              <input type="text" name="time" placeholder="19 : 00">
+            </div>
             <div class="column is-4">
-              <div class="columns">
-                <div class="column is-4 is-hidden-mobile">
-                  <a href="#" id="js-expand">+</a>
-                </div>
-                <div class="column is-6 is-offset-2-desktop pl-0">
-                  <input type="text" class="form-bar-user" name="user_name" placeholder="User Name" autocomplete="off" required>
-                </div>
-              </div>
+              <input type="text" name="event_datetime" placeholder="11/05/<?php echo date("Y"); ?>" required>
+            </div>
+            <div class="column is-5">
+              <input type="text" name="" placeholder="Event Type">
+            </div>
+          </div>
+          <input type="text" name="stream_url" placeholder="Stream URL" autocomplete="off" required>
+          <input type="text" name="stream_language" placeholder="Event Language" required>
+        </div>
+        <div class="column is-4">
+          <textarea name="description" rows="6" placeholder="Tell us about your event"></textarea>
+          <button type="submit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            </div>
-            <div class="column">
-              <div class="columns">
-                <div class="column is-9-desktop is-offset-3-desktop">
-                  <input type="text" name="user_email" placeholder="Email" autocomplete="off" required>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <input type="text" name="stream_url" placeholder="Stream URL" autocomplete="off" required>
-            </div>
-          </div>
+  <!-- START Search -->
+  <div class="js-search">
+    <div class="container">
+      <form class="menu-search" role="search" method="get" id="searchform" action="">
+        <input type="text" name="s" id="searchfield" value="" placeholder="Search.......">
+      </form>
+      <div class="menu-categories">
+        <a href="#" class="btn">Talk</a>
+        <a href="#" class="btn">Workshop</a>
+        <a href="#" class="btn">Screening</a>
+        <a href="#" class="btn">Performance</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- START Navigation -->
+  <div class="columns navigation">
+    <div class="column is-8">
+      <div class="columns">
+        <div class="column is-4">
+          <p id="create-listing">
+            (+) Online Event
+          </p>
+        </div>
+        <div class="column is-8">
+
         </div>
       </div>
-      <div class="js-hidden-form">
-        <div class="columns">
-          <div class="column is-11-desktop">
-            <div class="columns">
-              <div class="column is-4 is-offset-2-desktop">
-                <input type="text" name="stream_title" placeholder="Stream Title" required>
-                <input type="datetime-local" name="stream_datetime" placeholder="Stream Date" required>
-                <input type="text" name="stream_language" placeholder="Stream Country" required>
-                <input type="text" name="tags" placeholder="Tags">
-              </div>
-              <div class="column">
-                <textarea name="description" rows="8" cols="80" placeholder="Description (Optional - this will help get your stream approved quicker!)"></textarea>
-              <div class="column">
-                <button type="submit" class="btn btn-dark" name="button">Submit</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
+    </div>
+    <div class="column is-2">
+      <p>
+        Info
+      </p>
+    </div>
+    <div class="column is-2">
+      <p>
+        Search
+      </p>
+    </div>
   </div>
 </div>
 
 <?php wp_footer(); ?>
 <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/pushy.min.js"></script>
 <script src="https://kit.fontawesome.com/918d6a503e.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/lib/main.js?=<?=time();?>"></script>
 </body>

@@ -25,14 +25,16 @@ $(document).keydown(function(e) {
   }
 });
 
-$("#js-expand").click(function(e) {
+$("#create-listing").click(function(e) {
   e.preventDefault();
   if (formOpen === false) {
-    $(".js-hidden-form").slideDown();
-    $("#js-expand").html("-");
+    $(this).addClass("active");
+    $(".js-listing-form").slideDown();
+    $(".marquee").addClass("invert");
   } else {
-    $(".js-hidden-form").slideUp();
-    $("#js-expand").html("+");
+    $(this).removeClass("active");
+    $(".js-listing-form").slideUp();
+    $(".marquee").removeClass("invert");
   }
   formOpen = !formOpen;
 });

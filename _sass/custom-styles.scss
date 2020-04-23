@@ -116,7 +116,7 @@
         transform: translateY(-50%);
         width: 12px;
         height: 12px;
-        background: $primary;
+        background: $red;
         @include rounded;
       }
     }
@@ -210,71 +210,142 @@
   }
 }
 
-.form-bar {
+.bottom-bar {
   position: fixed;
   background: $white;
-  border: 2px $primary solid;
-  border-radius: 25px;
-  -webkit-border-radius: 25px;
-  width: calc(100% - 1rem);
-  bottom: .5rem;
-  left: .5rem;
-  right: .5rem;
-  opacity: 1;
-  visibility: visible;
-  @include transform(opacity, 350ms);
-  &.hidden {
-    opacity: 0;
-    visibility: hidden;
-  }
-  .columns {
-    &.m-0 {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 99999999;
+  .navigation {
+    text-align: center;
+    background: $white;
+    border-top: 1px solid $primary;
+    position: relative;
+    z-index: 3;
+    .columns {
       margin: 0;
+      margin-bottom: .75rem;
+    }
+    .column {
+      padding: 0;
+      border-right: 1px solid $primary;
+      &:last-of-type {
+        border-right: none;
+      }
+      p {
+        display: block;
+        padding: 1rem 2rem;
+        font-size: 1.4rem;
+        @include transform(all, 250ms);
+        color: $primary;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+         -khtml-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+        &.active {
+          background: $primary;
+          color: $white;
+        }
+      }
     }
   }
-  .column {
-    &.pl-0 {
-      padding-left: .25rem;
-    }
-  }
-  #js-expand {
-    color: $primary;
-    font-size: 2rem;
-    font-weight: bold;
-    line-height: 0.5;
+}
+
+.marquee {
+  position: relative;
+  bottom: 11px;
+  width: 100%;
+  background: $white;
+  margin: 0 auto;
+  border-top: 1px solid $primary;
+  border-bottom: 1px solid $primary;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  @include transform(background, 350ms);
+  .left {
     display: inline-block;
-    margin-top: .35rem;
-    position: absolute;
-    left: -2rem;
-    @include transform(color, 120ms);
-    &:hover {
-      color: darken($primary, 20%);
+    animation: marquee 20s linear infinite;
+  }
+  .right {
+    display: inline-block;
+    animation: marquee2 20s linear infinite;
+    animation-delay: 10s;
+  }
+  span {
+    font-size: 5rem;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+    color: $primary;
+    display: inline-block;
+    // padding-left: 100%;
+    // will-change: transform;
+    // animation: marquee 15s linear infinite;
+    @include transform(color, 350ms);
+  }
+  &.invert {
+    background: $primary;
+    span {
+      color: $white;
+    }
+  }
+}
+
+.js-listing-form {
+  display: none;
+  padding: 3rem 0 4rem;
+  margin-top: -11px;
+  z-index: 1;
+  .datetimecol {
+    margin-bottom: 0;
+    .column {
+      padding-bottom: 0;
     }
   }
   input, textarea {
     border: none;
-    font-size: 1.2rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    padding: .5rem 0;
+    margin-bottom: 1rem;
     box-shadow: none;
     width: 100%;
     -webkit-appearance: none;
-    border-bottom: 1px solid $grey-lighter;
+    border-bottom: 1px solid $primary;
     &:focus {
-      box-shadow: none;
-      -webkit-appearance: none;
+      outline: none;
     }
+  }
+  textarea {
+    margin-top: 2.05rem;
+    padding: .5rem ;
+    border: 1px solid $primary;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 120px;
+    max-height: 120px;
   }
   button {
+    @include rounded;
+    @include transform(all, 250ms);
     cursor: pointer;
-    font-size: 1.2rem;
+    border: 1px solid $primary;
+    color: $primary;
+    padding: .25rem 1rem;
+    font-size: 1rem;
     float: right;
-    margin-bottom: 1rem;
-  }
-  .js-hidden-form {
-    display: none;
-    padding-top: .5rem;
-    input {
-      margin: 1rem 0;
+    &:hover {
+      background: $primary;
+      color: $white;
     }
   }
+}
+
+.js-search {
+  display: none;
 }
