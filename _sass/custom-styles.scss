@@ -39,8 +39,8 @@
   }
   border-bottom: 1px solid $grey-lighter;
   .country, .time {
-    border: 1px solid $grey;
-    color: $grey;
+    border: 1px solid $primary;
+    color: $primary;
     // font-family: $title-family;
     @include rounded;
     text-align: center;
