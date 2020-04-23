@@ -2,7 +2,7 @@
 
 <?php
 
-$today = date('dmY');
+$today = date('Ymd');
 
 // handle listing create form
 if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
@@ -18,16 +18,23 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
   $title =  $_POST['event_name'];
   $url =  $_POST['event_url'];
   $language = $_POST['event_language'];
+
   $time = $_POST['event_time'];
   $date = $_POST['event_date'];
-  $description =  $_POST['event_description'];
 
+  $date_post = $_POST['event_date'];
+  $date_list = explode("/", $meta_date);
+  $date_string = $date_list[2] . $date_list[1] . $date_list[0];
+  $time_stamp = date($date_string);
+
+  $description =  $_POST['event_description'];
   $category = $_POST['event_type'];
 
   // Add the content of the form to $post as an array
   $post_information = array(
       'post_title'    => $title,
       'post_content'  => '<!-- wp:paragraph -->' . $description .'<!-- /wp:paragraph -->',
+      'post_date'     => $timestamp,
       'post_category' => $category,
       'meta_input' => array(
                         'event_host' => $host,
@@ -38,6 +45,7 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
                         'event_country' => $country,
                         'event_time' => $time,
                         'event_date' => $date,
+                        'event_timestamp' => $time_stamp,
                         'event_language' => $language
                       ),
       'post_type' => 'post',
@@ -50,7 +58,7 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
 ?>
 
 <section id="main">
-  <div class="archive-fade">
+  <div id="archive">
     <?php
       $query = new WP_Query(
         array(
@@ -92,7 +100,7 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
           'meta_query' => array(
               array(
                   'key' => 'event_date',
-                  'value' => $today, // date format error
+                  'value' => $today,
                   'compare' => '>='
               )
            )
@@ -101,7 +109,6 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
 
       if ( $query->have_posts() ) :
       while ( $query->have_posts() ) : $query->the_post();
-
           get_template_part( 'template-parts/items', 'upcoming' );
 
         endwhile;
