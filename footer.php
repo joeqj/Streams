@@ -1,7 +1,7 @@
 <div class="bottom-bar">
 
   <!-- START Marquee -->
-  <div class="marquee">
+  <div class="marquee main active">
     <div class="left">
       <span> *** Todays Supply *** World Lockdown Livestreams&nbsp;</span>
     </div>
@@ -38,7 +38,9 @@
           </p>
         </div>
         <div class="column is-8">
-
+          <div class="marquee navigation active">
+            <!-- Content to go here -->
+          </div>
         </div>
       </div>
     </div>

@@ -1,27 +1,33 @@
 <?php
+
+$today = date('Ymd');
+
 // get variables
-$timestamp = get_post_meta(get_the_ID(), 'stream_time', true);
 $title = get_the_title();
-$name = get_post_meta(get_the_ID(), 'user_name', true);
-$url = get_post_meta(get_the_ID(), 'stream_url', true);
-$country = get_post_meta(get_the_ID(), 'stream_language', true);
+$host = get_post_meta(get_the_ID(), 'event_host', true);
+$city = get_post_meta(get_the_ID(), 'event_city', true);
+$country = get_post_meta(get_the_ID(), 'event_country', true);
 
-$tags = '<div class="post-tags">';
-$tagQuery = wp_get_post_tags(get_the_ID(), array('fields' => 'all'));
-foreach ( $tagQuery as $tag ) {
-  $tag_link = get_tag_link( $tag->term_id );
+$url = get_post_meta(get_the_ID(), 'event_url', true);
+$language = get_post_meta(get_the_ID(), 'event_language', true);
+$meta_time = get_post_meta(get_the_ID(), 'event_time', true);
+$meta_date = get_post_meta(get_the_ID(), 'event_date', true);
 
-  $tags .= "<a href='{$tag_link}' title='{$tag->name} Tag' class='{$tag->slug}'>";
-  $tags .= "{$tag->name}</a>";
-}
-$tags .= '</div>';
+$time = preg_replace("/[^0-9:]/", "", $meta_time);
+$date = explode("/", $meta_date);
+
+$timestamp = $date[2] . "/" . $date[1] . "/" . $date[0] . " ";
 
 ?>
 
 <!-- START list item -->
 <div id="list-item" class="columns archive">
+  <!-- date / title column -->
+  <div class="column is-1-desktop date">
+    <p class="mt-1 is-5"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
+  </div>
   <!-- language / time column -->
-  <div class="column is-4-desktop">
+  <div class="column is-5-desktop">
     <div class="columns">
       <div class="column is-6-desktop">
         <div class="columns is-mobile">
@@ -29,35 +35,25 @@ $tags .= '</div>';
             <div class="country"><span><?php echo $country ?></span></div>
           </div>
           <div class="column is-8">
-            <span class="time"><?php echo date("H:i", strtotime($timestamp)); ?></span>
+            <span class="time"><?php echo $time ?></span>
           </div>
         </div>
       </div>
       <div class="column is-6-desktop pt-1">
-        <a href="#" class="username title is-5"><span><?php echo $name ?></span></a>
+        <a href="#" class="username title is-5"><span><?php echo $host ?></span></a>
+        <p><?php echo $city ?></p>
       </div>
     </div>
   </div>
-  <!-- date / title column -->
-  <div class="column is-4-desktop">
-    <div class="columns">
-      <div class="column is-3-desktop">
-        <p class="mt-1 title is-5"><?php echo date("d-M", strtotime($timestamp)); ?></p>
-      </div>
-      <div class="column is-9-desktop item-title">
-        <p class="mt-1 title is-4"><?php echo $title ?></p>
-        <a href="#" class="btn">Talk</a>
-      </div>
-    </div>
-  </div>
+
   <!-- description / link column -->
-  <div class="column is-4-desktop">
+  <div class="column is-6-desktop">
     <div class="columns">
       <div class="column is-8-desktop description">
         <p class="mt-1"><?php echo the_content(); ?></p>
       </div>
-      <div class="column is-4">
-        <a href="#" class="btn btn-dark mt-2">Watch</a>
+      <div class="column is-4 language">
+        <p><?php echo $language ?></p>
       </div>
     </div>
   </div>

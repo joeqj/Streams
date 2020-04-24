@@ -11,6 +11,16 @@ $(document).keydown(function(e) {
   }
 });
 
+$('#list-item').on("mouseenter mouseleave", function(e) {
+  if(e.type == "mouseenter") {
+    console.log(e.type);
+    $(this).find(".marquee.listing").slideDown();
+  } else {
+    console.log(e.type);
+    $(this).find(".marquee.listing").slideUp();
+  }
+});
+
 $("#create-listing").click(function(e) {
   e.preventDefault();
   var scroll = window.pageYOffset
@@ -21,7 +31,7 @@ $("#create-listing").click(function(e) {
     $(this).addClass("active");
     $(this).text("(-) Online Event");
     $(".js-listing-form").slideDown();
-    $(".marquee").addClass("invert");
+    $(".marquee.main").addClass("invert");
     $('input.timepicker').timepicker({
       timeFormat: "hh:mm p",
       zindex: 1001,
@@ -31,12 +41,14 @@ $("#create-listing").click(function(e) {
       inline: false,
       format: 'dd/mm/yyyy'
     });
+    $('.marquee.navigation').html('<div class="left"><p> TODAYS SUPPLY is a directory for online events across the arts, design, creative world. Submit your event using the form above!</p></div><div class="right"><p> TODAYS SUPPLY is a directory for online events across the arts, design, creative world. Submit your event using the form above!</p></div>');
   } else {
     $(document).unbind('scroll');
     $(this).removeClass("active");
     $(this).text("(+) Online Event");
     $(".js-listing-form").slideUp();
-    $(".marquee").removeClass("invert");
+    $(".marquee.main").removeClass("invert");
+    $('.marquee.navigation').html("");
   }
   formOpen = !formOpen;
 });
@@ -97,23 +109,6 @@ $('#searchfield').on("change paste keyup", function(e){
         $('#upcoming-posts').html(data);
     });
   } else {
-    $.get( '/', { s: "" }, function( data ){
-        $('#upcoming-posts').html(data);
-    });
-  }
-});
-
-$(".menu-tags a").on("click", function(e) {
-  e.preventDefault();
-  $(".menu-tags a").not($(this)).removeClass('active');
-  console.log($(this).attr("href"));
-  if (!$(this).hasClass("active")) {
-    $(this).addClass("active");
-    $.get( $(this).attr("href"), function( data ){
-        $('#upcoming-posts').html(data);
-    });
-  } else {
-    $(this).removeClass("active");
     $.get( '/', { s: "" }, function( data ){
         $('#upcoming-posts').html(data);
     });
