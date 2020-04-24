@@ -2,7 +2,7 @@
 
 <?php
 
-$today = date('Ymd');
+$today = date('Y-m-d');
 
 // handle listing create form
 if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
@@ -22,10 +22,7 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
   $time = $_POST['event_time'];
   $date = $_POST['event_date'];
 
-  $date_post = $_POST['event_date'];
-  $date_list = explode("/", $meta_date);
-  $date_string = $date_list[2] . $date_list[1] . $date_list[0];
-  $time_stamp = date($date_string);
+  $timestamp = $_POST['event_timestamp'];
 
   $description =  $_POST['event_description'];
   $category = $_POST['event_type'];
@@ -34,7 +31,6 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
   $post_information = array(
       'post_title'    => $title,
       'post_content'  => '<!-- wp:paragraph -->' . $description .'<!-- /wp:paragraph -->',
-      'post_date'     => $timestamp,
       'post_category' => $category,
       'meta_input' => array(
                         'event_host' => $host,
@@ -45,7 +41,7 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
                         'event_country' => $country,
                         'event_time' => $time,
                         'event_date' => $date,
-                        'event_timestamp' => $time_stamp,
+                        'event_timestamp' => $timestamp,
                         'event_language' => $language
                       ),
       'post_type' => 'post',
@@ -64,12 +60,12 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
         array(
           'posts_per_page' => 2,
           'post_status' => 'publish',
-          'meta_key' => 'event_date',
+          'meta_key' => 'event_timestamp',
           'orderby' => 'meta_value',
           'order' => 'ASC',
           'meta_query' => array(
               array(
-                  'key' => 'event_date',
+                  'key' => 'event_timestamp',
                   'value' => $today, // date format error
                   'compare' => '<='
               )
@@ -94,12 +90,12 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
         array(
           'posts_per_page' => 10,
           'post_status' => 'publish',
-          'meta_key' => 'event_date',
+          'meta_key' => 'event_timestamp',
           'orderby' => 'meta_value',
           'order' => 'ASC',
           'meta_query' => array(
               array(
-                  'key' => 'event_date',
+                  'key' => 'event_timestamp',
                   'value' => $today,
                   'compare' => '>='
               )

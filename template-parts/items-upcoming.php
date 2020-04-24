@@ -16,12 +16,12 @@ $meta_date = get_post_meta(get_the_ID(), 'event_date', true);
 $time = preg_replace("/[^0-9:]/", "", $meta_time);
 $date = explode("/", $meta_date);
 
-$timestamp = $date[2] . "/" . $date[1] . "/" . $date[0] . " " . $time;
+$timestamp = $date[2] . "/" . $date[1] . "/" . $date[0] . " ";
 
 ?>
 
 <!-- START list item -->
-<div id="list-item" class="columns <?php if(date("m", strtotime($timestamp)) == date("m", strtotime($today))):?>is-live <?php endif; ?>">
+<div id="list-item" class="columns <?php if(date("d", strtotime($timestamp)) == date("d", strtotime($today))):?>is-live <?php endif; ?>">
   <!-- language / time column -->
   <div class="column is-4-desktop">
     <div class="columns">

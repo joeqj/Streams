@@ -268,6 +268,7 @@
             </div>
             <div class="column is-4">
               <input type="text" class="datepicker" name="event_date" placeholder="<?php echo date("d/m/Y"); ?>" autocomplete="off">
+              <input type="hidden" name="event_timestamp" class="timestamp-h" value="">
             </div>
             <div class="column is-5">
               <select name="event_type">

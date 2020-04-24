@@ -41,6 +41,15 @@ $("#create-listing").click(function(e) {
   formOpen = !formOpen;
 });
 
+
+
+$(".datepicker").on("change", function() {
+  console.log($(".timepicker").val());
+  var from = $(this).val().split("/");
+  var date = [from[2], from[1], from[0]].join('-');
+  $(".timestamp-h").val(date);
+})
+
 $("form[name='listing-form']").validate({   //#register-form is form id
      // Specify the validation rules
      rules: {
@@ -75,7 +84,7 @@ $("form[name='listing-form']").validate({   //#register-form is form id
     element.attr("placeholder", error[0].outerText);
 },
      submitHandler: function(form) {
-         form.submit();
+       form.submit();
      }
  });
 
