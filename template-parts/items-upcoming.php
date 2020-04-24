@@ -22,6 +22,8 @@ if (strpos($url, 'youtube') !== false) {
   $source = " Twitch";
 } elseif (strpos($url, 'facebook') !== false) {
   $source = " Facebook";
+} elseif (strpos($url, 'pornhub') !== false) {
+  $source = " Pornhub";
 } else {
   $source = "line";
 }

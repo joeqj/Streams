@@ -258,6 +258,7 @@
       p {
         display: block;
         padding: 1rem;
+        line-height: 1.7;
         font-size: 0.8rem;
         @media (min-width: 321px) {
           font-size: 1rem;
@@ -295,6 +296,7 @@
   white-space: nowrap;
   overflow: hidden;
   box-sizing: border-box;
+  padding: .65rem 0 .25rem;
   @include transform(background, 350ms);
   .left, .right {
     display: inline-block;
@@ -306,7 +308,7 @@
     span {
       font-size: 5rem;
       font-weight: 500;
-      line-height: 1;
+      line-height: 0.8;
       text-transform: uppercase;
       color: $primary;
       display: inline-block;
