@@ -29,7 +29,7 @@ function modify_search_results_order($query) {
   $query->query_vars['orderby']    = 'meta_value';
   $query->query_vars['meta_query'] = [
     array(
-      'key'   => 'stream_time',
+      'key'   => 'event_timestamp',
       'value' => date('Ymd'),
       'compare' => '<='
     )

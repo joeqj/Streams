@@ -15,6 +15,7 @@ var Marquee = function (element, defaults) {
     options = (defaults === undefined) ? {} : defaults,
     continuous = options.continuous || true,	// once or continuous
     direction = options.direction || 'ltr', 	// ltr or rtl
+    offset = options.offset,
     loops = options.loops || -1,
     speed = options.speed || 0.5,
     milestone = 0,
@@ -47,9 +48,6 @@ var Marquee = function (element, defaults) {
         marqueeElem.innerHTML += elemHTML;
         marqueeElem.style.width = '200%';
 
-        if (direction === 'ltr') {
-          start = -elemWidth;
-        }
       } else {
         ltrCond = elem.offsetWidth;
 
@@ -59,7 +57,7 @@ var Marquee = function (element, defaults) {
       }
 
       if (direction === 'ltr') {
-        milestone = -elemWidth;
+        milestone = -elem.offsetWidth / 4;
       } else if (direction === 'rtl') {
         speed = -speed;
       }

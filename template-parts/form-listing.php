@@ -284,7 +284,7 @@
         </div>
         <div class="column is-4">
           <textarea name="event_description" rows="6" placeholder="Tell us about your event"></textarea>
-
+          
           <button type="submit">Submit</button>
         </div>
       </div>

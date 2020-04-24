@@ -1,51 +1,35 @@
 <div class="bottom-bar">
 
-  <!-- START Marquee -->
   <div id="main-marquee" class="marquee main">
     <span> *** Todays Supply *** World Lockdown Livestreams&nbsp;</span>
   </div>
 
-  <!-- START Listing Form -->
   <?php get_template_part( 'template-parts/form', 'listing' ); ?>
+  <?php get_template_part( 'template-parts/info' ); ?>
+  <?php get_template_part( 'template-parts/form', 'search' ); ?>
 
-  <!-- START Search -->
-  <div class="js-search">
-    <div class="container">
-      <form class="menu-search" role="search" method="get" id="searchform" action="">
-        <input type="text" name="s" id="searchfield" value="" placeholder="Search.......">
-      </form>
-      <div class="menu-categories">
-        <a href="#" class="btn">Talk</a>
-        <a href="#" class="btn">Workshop</a>
-        <a href="#" class="btn">Screening</a>
-        <a href="#" class="btn">Performance</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- START Navigation -->
-  <div class="columns navigation">
-    <div class="column is-8">
+  <div class="columns navigation is-mobile">
+    <div class="column is-6-mobile is-8-desktop parent">
       <div class="columns">
-        <div class="column is-4">
-          <p id="create-listing">
+        <div class="column is-4-desktop">
+          <p id="js-open-create-listing">
             (+) Online Event
           </p>
         </div>
-        <div class="column is-8">
+        <div class="column is-8 is-hidden-mobile">
           <div class="marquee navigation active">
             <!-- Content goes ere -->
           </div>
         </div>
       </div>
     </div>
-    <div class="column is-2">
-      <p>
+    <div class="column is-3-mobile is-2-desktop">
+      <p id="js-open-info">
         Info
       </p>
     </div>
-    <div class="column is-2">
-      <p>
+    <div class="column is-3-mobile is-2-desktop">
+      <p id="js-open-search">
         Search
       </p>
     </div>

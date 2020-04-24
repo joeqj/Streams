@@ -2313,10 +2313,19 @@ a.has-text-danger:hover, a.has-text-danger:focus {
 
 #archive {
   position: relative;
-  top: -2rem; }
+  top: -2rem;
+  display: none; }
+  @media (min-width: 768px) {
+    #archive {
+      display: block; } }
+  #archive #list-item {
+    cursor: auto; }
 
 #upcoming-posts {
-  margin-top: -2rem; }
+  margin-top: 0; }
+  @media (min-width: 768px) {
+    #upcoming-posts {
+      margin-top: -2rem; } }
 
 #list-item {
   cursor: pointer;
@@ -2324,8 +2333,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   border-bottom: 1px solid #dbdbdb; }
   @media (min-width: 768px) {
     #list-item {
-      padding: .5rem 1rem .75rem; } }
-  #list-item:hover .language p {
+      padding: 1rem; } }
+  #list-item:hover .language p, #list-item.archive .language p {
     opacity: 1;
     visibility: visible; }
   #list-item .country, #list-item .time {
@@ -2345,7 +2354,11 @@ a.has-text-danger:hover, a.has-text-danger:focus {
       margin: auto;
       transform: translateY(-50%); }
   #list-item .date {
-    text-align: center; }
+    margin-top: .75rem; }
+    @media (min-width: 768px) {
+      #list-item .date {
+        text-align: center;
+        margin-top: 0; } }
   @media (min-width: 768px) {
     #list-item .mt-1 {
       margin-top: .55rem; } }
@@ -2363,12 +2376,15 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     font-size: 1.2rem;
     line-height: 1.5;
     padding: 0 1.5rem; }
-  #list-item .username {
+  #list-item .host .name {
     display: inline-block;
     width: auto;
-    margin-top: .35rem;
+    margin-top: .45rem;
     line-height: 1.6; }
-    #list-item .username span {
+    @media (min-width: 768px) {
+      #list-item .host .name {
+        display: block; } }
+    #list-item .host .name span {
       padding-bottom: 0rem;
       border-bottom: 1px solid rgba(125, 125, 125, 0.5);
       -webkit-transition: all 250ms ease-in-out;
@@ -2376,9 +2392,22 @@ a.has-text-danger:hover, a.has-text-danger:focus {
       -ms-transition: all 250ms ease-in-out;
       -o-transition: all 250ms ease-in-out;
       transition: all 250ms ease-in-out; }
-      #list-item .username span:hover {
-        padding-bottom: .05rem;
+      #list-item .host .name span:hover {
+        padding-bottom: .1rem;
         border-color: #7d7d7d; }
+  #list-item .host .mobile-language p {
+    color: #091344;
+    font-size: .85em; }
+  #list-item .host p {
+    font-size: 1.25em;
+    display: inline-block; }
+    #list-item .host p.city {
+      margin-left: -.5rem; }
+      #list-item .host p.city:before {
+        content: ", "; }
+    @media (min-width: 768px) {
+      #list-item .host p {
+        font-size: 1em; } }
   #list-item .language {
     position: relative;
     text-align: center; }
@@ -2400,7 +2429,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     display: inline-block; }
   @media (min-width: 768px) {
     #list-item .description {
-      padding-left: 0; } }
+      padding-left: 0;
+      margin-top: .35rem; } }
   #list-item .description p {
     font-size: 85%; }
   #list-item.is-live .country, #list-item.is-live .time {
@@ -2442,7 +2472,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     opacity: 0.7; }
 
 .search-error {
-  margin-top: 3rem; }
+  padding: 3rem 2rem; }
 
 .bottom-bar {
   position: fixed;
@@ -2464,12 +2494,15 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     .bottom-bar .navigation .column {
       padding: 0;
       border-right: 1px solid #091344; }
+      @media screen and (max-width: 768px) {
+        .bottom-bar .navigation .column.parent {
+          border: none; } }
       .bottom-bar .navigation .column:last-of-type {
         border-right: none; }
       .bottom-bar .navigation .column p {
         display: block;
-        padding: 1rem 2rem;
-        font-size: 1.4rem;
+        padding: 1rem;
+        font-size: 0.8rem;
         -webkit-transition: all 250ms ease-in-out;
         -moz-transition: all 250ms ease-in-out;
         -ms-transition: all 250ms ease-in-out;
@@ -2483,6 +2516,13 @@ a.has-text-danger:hover, a.has-text-danger:focus {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none; }
+        @media (min-width: 321px) {
+          .bottom-bar .navigation .column p {
+            font-size: 1rem; } }
+        @media (min-width: 768px) {
+          .bottom-bar .navigation .column p {
+            font-size: 1.4rem;
+            padding: 1rem 2rem; } }
         .bottom-bar .navigation .column p.active {
           background: #091344;
           color: white; }
@@ -2551,18 +2591,30 @@ a.has-text-danger:hover, a.has-text-danger:focus {
 
 .js-listing-form {
   display: none;
-  padding: 3rem 0 4rem;
+  padding: 3rem 1rem 5rem;
   margin-top: -11px;
   z-index: 1; }
+  @media (min-width: 768px) {
+    .js-listing-form {
+      padding: 3rem 0 4rem; } }
+  @media screen and (max-width: 768px) {
+    .js-listing-form {
+      height: calc(100vh - 21px);
+      overflow-y: auto; } }
   .js-listing-form .datetimecol {
     margin-bottom: 0; }
     .js-listing-form .datetimecol .column {
       padding-bottom: 0; }
+  @media screen and (max-width: 768px) {
+    .js-listing-form .column {
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0; } }
   .js-listing-form input, .js-listing-form textarea {
     border: none;
     font-size: 1rem;
     padding: .5rem 0;
-    margin-bottom: 1rem;
+    display: block;
     box-shadow: none;
     width: 100%;
     -webkit-appearance: none;
@@ -2572,12 +2624,18 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     -ms-transition: border-color 250ms ease-in-out;
     -o-transition: border-color 250ms ease-in-out;
     transition: border-color 250ms ease-in-out; }
+    @media (min-width: 768px) {
+      .js-listing-form input, .js-listing-form textarea {
+        margin-bottom: 1rem; } }
     .js-listing-form input.error, .js-listing-form textarea.error {
       border-color: #f14668; }
     .js-listing-form input:focus, .js-listing-form textarea:focus {
       outline: none; }
     .js-listing-form input[type=time], .js-listing-form textarea[type=time] {
       padding: .35rem 0; }
+    @media screen and (max-width: 768px) {
+      .js-listing-form input[name=event_name], .js-listing-form textarea[name=event_name] {
+        margin-bottom: 1rem; } }
   .js-listing-form textarea {
     margin-top: 2.05rem;
     padding: .5rem;
@@ -2585,7 +2643,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     min-width: 100%;
     max-width: 100%;
     min-height: 120px;
-    max-height: 120px; }
+    max-height: 120px;
+    margin-bottom: 1rem; }
   .js-listing-form select {
     position: relative;
     display: inline-block;
@@ -2593,7 +2652,6 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     border: none;
     font-size: 1rem;
     padding: .5rem 0;
-    margin-bottom: 1rem;
     box-shadow: none;
     width: 100%;
     -webkit-appearance: none;
@@ -2611,6 +2669,9 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     -ms-transition: border-color 250ms ease-in-out;
     -o-transition: border-color 250ms ease-in-out;
     transition: border-color 250ms ease-in-out; }
+    @media (min-width: 768px) {
+      .js-listing-form select {
+        margin-bottom: 1rem; } }
     .js-listing-form select:invalid, .js-listing-form select [disabled] {
       color: white; }
     .js-listing-form select:focus {
@@ -2640,4 +2701,51 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     color: #f14668; }
 
 .js-search {
-  display: none; }
+  display: none;
+  padding: 2rem 2rem 3rem;
+  z-index: 1;
+  text-align: center;
+  border-top: 1px solid #091344; }
+  @media (min-width: 768px) {
+    .js-search {
+      padding: 3rem 0 4rem; } }
+  .js-search input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #091344;
+    font-size: 2rem;
+    margin-bottom: 1.5rem; }
+    .js-search input:focus {
+      outline: none; }
+  .js-search a {
+    margin-top: .25rem;
+    margin-bottom: .25rem; }
+    @media (min-width: 768px) {
+      .js-search a {
+        margin: 0; } }
+
+.js-info {
+  display: none;
+  padding: 2rem 1rem;
+  z-index: 1;
+  text-align: left; }
+  @media (min-width: 768px) {
+    .js-info {
+      padding: 3rem 0 4rem; } }
+  @media screen and (max-width: 320px) {
+    .js-info {
+      height: calc(100vh - 21px);
+      overflow-y: auto; } }
+  .js-info p {
+    color: #091344;
+    margin-top: 1rem; }
+    .js-info p:first-of-type {
+      margin-top: 0.25rem; }
+    .js-info p.big {
+      margin-top: 0;
+      font-size: 1.2rem; }
+      @media (min-width: 768px) {
+        .js-info p.big {
+          font-size: 1.5rem; } }
+  .js-info a {
+    text-decoration: underline; }

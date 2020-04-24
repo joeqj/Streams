@@ -67,7 +67,7 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
               array(
                   'key' => 'event_timestamp',
                   'value' => $today, // date format error
-                  'compare' => '<='
+                  'compare' => '<'
               )
            )
          )
@@ -106,7 +106,6 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
       if ( $query->have_posts() ) :
       while ( $query->have_posts() ) : $query->the_post();
           get_template_part( 'template-parts/items', 'upcoming' );
-
         endwhile;
       endif;
 
