@@ -33,6 +33,7 @@
 }
 
 #list-item {
+  cursor: pointer;
   padding: 1rem;
   @media (min-width: 768px) {
     padding: .5rem 1rem .75rem;
@@ -159,6 +160,9 @@
       text-decoration: line-through;
     }
   }
+  .url-banner {
+    display: none;
+  }
 }
 
 .search-btn {
@@ -241,6 +245,9 @@
   overflow: hidden;
   box-sizing: border-box;
   @include transform(background, 350ms);
+  .left, .right {
+    display: inline-block;
+  }
   &.main {
     bottom: 11px;
     border-top: 1px solid $primary;
@@ -259,6 +266,13 @@
     border: none;
     top: 50%;
     transform: translateY(-50%);
+    .left {
+      animation: marquee 15s linear infinite;
+    }
+    .right {
+      animation: marquee2 15s linear infinite;
+      animation-delay: 7.5s;
+    }
   }
   &.listing {
     span {
@@ -271,17 +285,7 @@
       @include transform(color, 350ms);
     }
   }
-  &.active {
-    .left {
-      display: inline-block;
-      animation: marquee 10s linear infinite;
-    }
-    .right {
-      display: inline-block;
-      animation: marquee2 10s linear infinite;
-      animation-delay: 5s;
-    }
-  }
+
   p {
     font-size: .9rem !important;
     color: $black;

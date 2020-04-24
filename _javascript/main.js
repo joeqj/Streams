@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('What u doing looking here');
+  new Marquee('main-marquee', { direction: 'rtl', speed: 1 });
 });
 
 var formOpen = false;
@@ -8,16 +9,6 @@ var searchOpen = false;
 $(document).keydown(function(e) {
   if (e.keyCode === 27) {
 
-  }
-});
-
-$('#list-item').on("mouseenter mouseleave", function(e) {
-  if(e.type == "mouseenter") {
-    console.log(e.type);
-    $(this).find(".marquee.listing").slideDown();
-  } else {
-    console.log(e.type);
-    $(this).find(".marquee.listing").slideUp();
   }
 });
 

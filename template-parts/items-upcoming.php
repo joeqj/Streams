@@ -9,6 +9,10 @@ $city = get_post_meta(get_the_ID(), 'event_city', true);
 $country = get_post_meta(get_the_ID(), 'event_country', true);
 
 $url = get_post_meta(get_the_ID(), 'event_url', true);
+
+if (strpos($url,'http://') === false){
+    $url = 'http://'.$url;
+}
 $language = get_post_meta(get_the_ID(), 'event_language', true);
 $meta_time = get_post_meta(get_the_ID(), 'event_time', true);
 $meta_date = get_post_meta(get_the_ID(), 'event_date', true);
@@ -18,10 +22,12 @@ $date = explode("/", $meta_date);
 
 $timestamp = $date[2] . "/" . $date[1] . "/" . $date[0] . " ";
 
+$uid = $date[2] . $date[1] . $date[0]
+
 ?>
 
 <!-- START list item -->
-<div id="list-item" <?php if(date("d", strtotime($timestamp)) == date("d", strtotime($today))):?>class="is-live <?php endif; ?>">
+<div id="list-item" class="<?php echo $uid ?><?php if(date("d", strtotime($timestamp)) == date("d", strtotime($today))):?> is-live<?php endif; ?>">
   <div class="columns">
     <!-- date / title column -->
     <div class="column is-1-desktop date">
@@ -60,14 +66,30 @@ $timestamp = $date[2] . "/" . $date[1] . "/" . $date[0] . " ";
     </div>
   </div>
 
-  <div class="marquee listing active" data-url="<?php echo $url ?>">
-    <div class="left">
-      <span> *** Todays Supply *** World Lockdown Livestreams&nbsp;</span>
-    </div>
-    <div class="right">
-      <span> *** Todays Supply *** World Lockdown Livestreams&nbsp;</span>
-    </div>
+  <div class="url-banner">
+    <!-- Content to go ere -->
   </div>
+
+  <script type="text/javascript">
+    $('.<?php echo $uid ?>').on("mouseenter mouseleave", function(e) {
+      var banner = $(this).find(".url-banner");
+      var marqueeId = "list-marquee" + <?php echo $uid ?>;
+      var marqueeEl;
+      if(e.type == "mouseenter") {
+        banner.html('<div id="list-marquee<?php echo $uid ?>" class="marquee listing active"><span>Watch Now &#47;&#47;&#47; On Youtube! 	&#92;&#92;&#92;&nbsp;</span></div>');
+        banner.slideDown(200);
+        marqueeEl = new Marquee(marqueeId, { direction: 'rtl', speed: 1 });
+      } else {
+        banner.slideUp(200, function() {
+          banner.html("");
+        });
+        marqueeEl = null;
+      }
+    });
+    $('.<?php echo $uid ?>').on("click", function() {
+      window.open("<?php echo $url ?>", '_blank');
+    })
+  </script>
 
 </div>
 <!-- END list item -->

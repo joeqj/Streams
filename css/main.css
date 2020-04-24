@@ -2203,6 +2203,18 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   to {
     transform: translateX(-225%); } }
 
+@keyframes marquee3 {
+  from {
+    transform: translateX(100%); }
+  to {
+    transform: translateX(-50%); } }
+
+@keyframes marquee4 {
+  from {
+    transform: translateX(-100%); }
+  to {
+    transform: translateX(-300%); } }
+
 .ui-timepicker-container {
   position: absolute;
   overflow: hidden;
@@ -2307,6 +2319,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   margin-top: -2rem; }
 
 #list-item {
+  cursor: pointer;
   padding: 1rem;
   border-bottom: 1px solid #dbdbdb; }
   @media (min-width: 768px) {
@@ -2410,6 +2423,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     text-decoration: line-through; }
     #list-item.archive .country, #list-item.archive .time, #list-item.archive .username {
       text-decoration: line-through; }
+  #list-item .url-banner {
+    display: none; }
 
 .search-btn {
   color: #091344;
@@ -2487,6 +2502,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   -ms-transition: background 350ms ease-in-out;
   -o-transition: background 350ms ease-in-out;
   transition: background 350ms ease-in-out; }
+  .marquee .left, .marquee .right {
+    display: inline-block; }
   .marquee.main {
     bottom: 11px;
     border-top: 1px solid #091344;
@@ -2507,6 +2524,11 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     border: none;
     top: 50%;
     transform: translateY(-50%); }
+    .marquee.navigation .left {
+      animation: marquee 15s linear infinite; }
+    .marquee.navigation .right {
+      animation: marquee2 15s linear infinite;
+      animation-delay: 7.5s; }
   .marquee.listing span {
     font-size: 4rem;
     font-weight: 500;
@@ -2519,13 +2541,6 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     -ms-transition: color 350ms ease-in-out;
     -o-transition: color 350ms ease-in-out;
     transition: color 350ms ease-in-out; }
-  .marquee.active .left {
-    display: inline-block;
-    animation: marquee 10s linear infinite; }
-  .marquee.active .right {
-    display: inline-block;
-    animation: marquee2 10s linear infinite;
-    animation-delay: 5s; }
   .marquee p {
     font-size: .9rem !important;
     color: #0a0a0a; }
