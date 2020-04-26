@@ -62,23 +62,27 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
           'post_status' => 'publish',
           'meta_key' => 'event_timestamp',
           'orderby' => 'meta_value',
-          'order' => 'ASC',
+          'order' => 'DESC',
           'meta_query' => array(
               array(
                   'key' => 'event_timestamp',
-                  'value' => $today, // date format error
-                  'compare' => '<'
+                  'value' => $today,
+                  'compare' => '<='
               )
            )
          )
       );
+      // REVERSE POST ORDER
+      $array_rev = array_reverse($query->posts);
+      $query->posts = $array_rev;
 
       if ( $query->have_posts() ) :
-      while ( $query->have_posts() ) : $query->the_post();
 
+        while ( $query->have_posts() ) : $query->the_post();
+          set_query_var("post-class", "reveal");
           get_template_part( 'template-parts/items', 'archive' );
-
         endwhile;
+
       endif;
 
       wp_reset_postdata();
@@ -88,7 +92,7 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
     <?php
       $query = new WP_Query(
         array(
-          'posts_per_page' => 10,
+          'posts_per_page' => 5,
           'post_status' => 'publish',
           'meta_key' => 'event_timestamp',
           'orderby' => 'meta_value',
@@ -104,14 +108,20 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
       );
 
       if ( $query->have_posts() ) :
-      while ( $query->have_posts() ) : $query->the_post();
-          get_template_part( 'template-parts/items', 'upcoming' );
-        endwhile;
+
+        echo '<div class="page-limit" data-page="/">';
+
+          while ( $query->have_posts() ) : $query->the_post();
+            set_query_var("post-class", "reveal");
+            get_template_part( 'template-parts/items', 'upcoming' );
+          endwhile;
+
+        echo '</div>';
+
       endif;
 
       wp_reset_postdata();
     ?>
-  </div>
   </div>
 </section>
 

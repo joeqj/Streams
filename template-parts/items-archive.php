@@ -40,27 +40,30 @@ $uid = $date[2] . $date[1] . $date[0]
 ?>
 
 <!-- START list item -->
-<div id="list-item" class="archive">
+<div id="list-item" class="archive <?php echo get_query_var("post-class") ?>">
   <div class="columns">
     <!-- date / title column -->
-    <div class="column is-1-desktop date">
-      <p class="mt-1 is-5"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
+    <div class="column is-1-desktop is-hidden-mobile date">
+      <p class="mt-1 is-5"><?php echo $date[2]; echo "/"; echo $date[1] ?></p>
     </div>
     <!-- language / time column -->
     <div class="column is-4-desktop">
       <div class="columns">
         <div class="column is-6-desktop">
-          <div class="columns is-mobile">
+          <div class="columns is-mobile countrytime">
             <div class="column is-2-mobile is-4-tablet">
               <div class="country"><span><?php echo $country ?></span></div>
             </div>
-            <div class="column is-8">
+            <div class="column is-5-mobile is-8-desktop">
               <span class="time"><?php echo $time ?></span>
+            </div>
+            <div class="column is-4-mobile date is-visible-mobile is-hidden-tablet">
+              <p class="mt-2 is-5"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
             </div>
           </div>
         </div>
-        <div class="column is-6-desktop pt-1">
-          <a href="#" class="username title is-5"><span><?php echo $host ?></span></a>
+        <div class="column is-hidden-mobile is-6-desktop host">
+          <a href="#" class="name title is-5"><span><?php echo $host ?></span></a>
           <p><?php echo $city ?></p>
         </div>
       </div>
@@ -69,17 +72,29 @@ $uid = $date[2] . $date[1] . $date[0]
     <!-- description / link column -->
     <div class="column is-7-desktop">
       <div class="columns">
-        <div class="column is-4-desktop">
+        <div class="column is-5-desktop eventtitle">
           <p class="mt-1 title is-4"><?php echo $title ?></p>
         </div>
-        <div class="column is-6-desktop description">
+        <div class="column is-visible-mobile is-hidden-tablet pl-2 host">
+          <a href="#" class="name title is-5"><span><?php echo $host ?></span></a>
+          <p class="city"><?php echo $city ?></p>
+
+          <div class="mobile-language is-visible-mobile is-hidden-tablet">
+            <p><?php echo $language ?></p>
+          </div>
+        </div>
+        <div class="column is-5-desktop description">
           <p class="mt-1"><?php echo the_content(); ?></p>
         </div>
-        <div class="column is-2 language">
+        <div class="column is-2 language is-hidden-mobile">
           <p><?php echo $language ?></p>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="url-banner">
+    <!-- Content to go ere -->
   </div>
 
 </div>

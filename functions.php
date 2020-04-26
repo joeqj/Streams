@@ -1,5 +1,7 @@
 <?php
 
+require get_template_directory() . '/inc/ajax.php';
+
 add_action('add_meta_boxes', 'add_listing_details_meta');
 
 function add_listing_details_meta() {
@@ -35,6 +37,53 @@ function modify_search_results_order($query) {
     )
   ];
   return $query;
+}
+
+add_filter('manage_posts_columns', 'hs_post_table_head');
+
+function hs_post_table_head( $columns ) {
+    $columns['meta_event_date']  = 'Event Date';
+    $columns['meta_event_host']  = 'Event Host';
+    $columns['meta_event_url']  = 'Event URL';
+    return $columns;
+
+}
+add_action( 'manage_posts_custom_column', 'hs_post_table_content', 10, 2 );
+
+function hs_post_table_content( $column_name, $post_id ) {
+    if( $column_name == 'meta_event_date' ) {
+        echo get_post_meta( $post_id, 'event_date', true );
+    }
+    if( $column_name == 'meta_event_host' ) {
+        echo get_post_meta( $post_id, 'event_host', true );
+    }
+    if( $column_name == 'meta_event_url' ) {
+        echo get_post_meta( $post_id, 'event_url', true );
+    }
+}
+
+add_filter('manage_posts_columns', 'remove_post_columns');
+
+function remove_post_columns($defaults) {
+  unset($defaults['comments']);
+  unset($defaults['tags']);
+  unset($defaults['author']);
+  return $defaults;
+}
+
+add_filter('manage_posts_columns', 'column_order');
+
+function column_order($columns) {
+  $n_columns = array();
+  $move = 'Date'; // what to move
+  $before = 'Event URL'; // move before this
+  foreach($columns as $key => $value) {
+    if ($key==$before){
+      $n_columns[$move] = $move;
+    }
+      $n_columns[$key] = $value;
+  }
+  return $n_columns;
 }
 
 ?>

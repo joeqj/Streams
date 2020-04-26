@@ -2,9 +2,8 @@
 
 if ( have_posts() ) :
 while ( have_posts() ) : the_post();
-
+    set_query_var("post-class", "reveal");
     get_template_part( 'template-parts/items', 'search' );
-
   endwhile;
 else :
   ?>

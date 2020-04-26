@@ -1,3 +1,24 @@
+.mt-1 {
+  @media (min-width: 768px) {
+    margin-top: .55rem;
+  }
+}
+.mt-2 {
+  @media (min-width: 768px) {
+    margin-top: .75rem;
+  }
+}
+.pl-1 {
+  @media (min-width: 768px) {
+    padding-left: .5rem !important;
+  }
+}
+.pl-2 {
+  @media (min-width: 768px) {
+    padding-left: 1rem !important;
+  }
+}
+
 .btn {
   background: $grey;
   color: $white;
@@ -42,13 +63,24 @@
   }
 }
 
+.pagination {
+  margin: 4rem 0;
+}
+
 #list-item {
   cursor: pointer;
   padding: 1rem;
   @media (min-width: 768px) {
-    padding: 1rem;
+    padding: 1rem 2rem;
   }
   border-bottom: 1px solid $grey-lighter;
+  opacity: 0;
+  visibility: hidden;
+  @include transform(opacity, 250ms);
+  &.reveal {
+    opacity: 1;
+    visibility: visible;
+  }
   &:hover, &.archive {
     .language {
       p {
@@ -82,30 +114,29 @@
       margin-top: 0;
     }
   }
-  .mt-1 {
-    @media (min-width: 768px) {
-      margin-top: .55rem;
-    }
-  }
-  .mt-2 {
-    @media (min-width: 768px) {
-      margin-top: .75rem;
+  .countrytime {
+    @media(min-width: 768px) {
+      padding-left: 1.25rem;
     }
   }
   .country {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     line-height: 1;
-    width: 45px;
-    height: 45px;
+    margin-top: .15rem;
+    width: 40px;
+    height: 40px;
   }
   .time {
     position: relative;
     margin-top: .55rem;
-    font-size: 1.2rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.8;
     padding: 0 1.5rem;
   }
   .host {
+    @media (min-width: 768px) {
+      padding-right: 0;
+    }
     .name {
       display: inline-block;
       @media (min-width: 768px) {
@@ -162,9 +193,12 @@
   .item-title {
     display: inline-block;
   }
+  .eventtitle {
+    padding-left: 1.8rem;
+  }
   .description {
     @media (min-width: 768px) {
-      padding-left: 0;
+      padding-left: .5rem;
       margin-top: .35rem;
     }
     p {
@@ -183,8 +217,8 @@
         display: block;
         position: absolute;
         left: .4rem;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 40%;
+        transform: translateY(-40%);
         width: 12px;
         height: 12px;
         background: $red;
