@@ -194,7 +194,9 @@
     display: inline-block;
   }
   .eventtitle {
-    padding-left: 1.8rem;
+    @media (min-width: 768px) {
+      padding-left: 1.8rem;
+    }
   }
   .description {
     @media (min-width: 768px) {

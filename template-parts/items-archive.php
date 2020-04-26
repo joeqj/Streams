@@ -58,7 +58,7 @@ $uid = $date[2] . $date[1] . $date[0]
               <span class="time"><?php echo $time ?></span>
             </div>
             <div class="column is-4-mobile date is-visible-mobile is-hidden-tablet">
-              <p class="mt-2 is-5"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
+              <p class="mt-2 is-5"><?php echo $date[2]; echo "/"; echo $date[1] ?></p>
             </div>
           </div>
         </div>

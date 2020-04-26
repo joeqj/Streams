@@ -2471,8 +2471,9 @@ a.has-text-danger:hover, a.has-text-danger:focus {
       visibility: hidden; }
   #list-item .item-title {
     display: inline-block; }
-  #list-item .eventtitle {
-    padding-left: 1.8rem; }
+  @media (min-width: 768px) {
+    #list-item .eventtitle {
+      padding-left: 1.8rem; } }
   @media (min-width: 768px) {
     #list-item .description {
       padding-left: .5rem;
