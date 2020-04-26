@@ -38,7 +38,6 @@
 
 <?php wp_footer(); ?>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
-<script src="//unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/node_modules/jquery-timepicker/jquery.timepicker.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/node_modules/@chenfengyuan/datepicker/dist/datepicker.min.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/dateformat.js"></script>
