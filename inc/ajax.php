@@ -10,7 +10,7 @@ function load_more_streams() {
 
   $query = new WP_Query(
     array(
-      'posts_per_page' => 5,
+      'posts_per_page' => 4,
       'paged' => $paged,
       'post_status' => 'publish',
       'meta_key' => 'event_timestamp',

@@ -29,9 +29,7 @@
       </p>
     </div>
     <div class="column is-3-mobile is-2-desktop">
-      <p id="js-open-search">
-        Search
-      </p>
+      <p id="js-open-search">Search</p>
     </div>
   </div>
 </div>
@@ -45,7 +43,7 @@
 <script type="text/javascript">
   $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-      loadMoreStreams("<?php date('Y-m-d') ?>", "<?php echo admin_url('admin-ajax.php') ?>");
+      loadMoreStreams("<?php date('Ymd') ?>", "<?php echo admin_url('admin-ajax.php') ?>");
     }
   });
 </script>

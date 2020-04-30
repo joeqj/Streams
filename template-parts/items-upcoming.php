@@ -1,6 +1,7 @@
 <?php
 
-$today = date('Ymd');
+$today = date('Ymd h', time() + 3600);
+$isLive = false;
 
 // get variables
 $title = get_the_title();
@@ -11,7 +12,7 @@ $country = get_post_meta(get_the_ID(), 'event_country', true);
 $url = get_post_meta(get_the_ID(), 'event_url', true);
 
 if (strpos($url,'https://') === false){
-    $url = '//'.$url;
+    $url = 'https://'.$url;
 }
 
 if (strpos($url, 'youtube') !== false) {
@@ -32,18 +33,27 @@ $language = get_post_meta(get_the_ID(), 'event_language', true);
 $meta_time = get_post_meta(get_the_ID(), 'event_time', true);
 $meta_date = get_post_meta(get_the_ID(), 'event_date', true);
 
-$meta_timestamp = get_post_meta(get_the_ID(), 'event_timestamp', true);
+$timestamp = get_post_meta(get_the_ID(), 'event_timestamp', true);
 
 $time = preg_replace("/[^0-9:]/", "", $meta_time);
-$date = explode("-", $meta_timestamp);
+$date = explode("/", $meta_date);
+
+$categories = get_the_category();
+
+$calendarDate = explode(" ", $timestamp);
+$calendarTime = preg_replace("/[: ]/", "", $calendarDate[1]);
+$calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'.$calendarTime.'00/'.$calendarDate[0].'T'.$calendarTime.'00&ctz=London/England&details='.$url.'&location='.$city.', '.$country.'&trp=false&sprop=&sprop=name:';
+
+if(date("Ymd h", strtotime($timestamp)) == $today) {
+  $isLive = true;
+}
 
 ?>
-
-<div id="list-item" class="<?php the_ID(); ?> <?php echo get_query_var("post-class") ?><?php if(date("Ymd", strtotime($meta_timestamp)) == date("Ymd", strtotime($today))):?> is-live<?php endif; ?>">
+<div id="list-item" class="<?php the_ID(); ?> <?php echo get_query_var("post-class") ?><?php if($isLive == true):?> is-live<?php endif; ?>">
   <div class="columns">
     <!-- date / title column -->
-    <div class="column is-1-desktop is-hidden-mobile date">
-      <p class="mt-1 is-5"><?php echo $date[2]; echo "/"; echo $date[1] ?></p>
+    <div class="column is-1 is-hidden-mobile date">
+      <p class="mt-1 is-5"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
     </div>
     <!-- language / time column -->
     <div class="column is-4-desktop">
@@ -57,7 +67,7 @@ $date = explode("-", $meta_timestamp);
               <span class="time"><?php echo $time ?></span>
             </div>
             <div class="column is-4-mobile date is-visible-mobile is-hidden-tablet">
-              <p class="mt-2 is-5"><?php echo $date[2]; echo "/"; echo $date[1] ?></p>
+              <p class="mt-2 is-5"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
             </div>
           </div>
         </div>
@@ -73,6 +83,13 @@ $date = explode("-", $meta_timestamp);
       <div class="columns">
         <div class="column is-5-desktop eventtitle">
           <p class="mt-1 title is-4"><?php echo $title ?></p>
+          <?php
+            foreach ($categories as $c) {
+              echo '<span class="btn category">';
+              echo $c->name;
+              echo '</span>';
+            }
+          ?>
         </div>
         <div class="column is-visible-mobile is-hidden-tablet pl-2 host">
           <a href="#" class="name title is-5"><span><?php echo $host ?></span></a>
@@ -93,28 +110,37 @@ $date = explode("-", $meta_timestamp);
   </div>
 
   <div class="url-banner">
-    <!-- Content to go ere -->
+    <div id="list-marquee<?php the_ID(); ?>" class="marquee listing active">
+
+    </div>
   </div>
 
   <script type="text/javascript">
-    $('.<?php the_ID(); ?>').on("mouseenter mouseleave", function(e) {
+    $('.<?php the_ID(); ?>').on("click", function(e) {
+      e.preventDefault();
       var banner = $(this).find(".url-banner");
-      var marqueeId = "list-marquee" + <?php the_ID(); ?>;
-      var marqueeEl;
-      if(e.type == "mouseenter") {
-        banner.html('<div id="list-marquee<?php the_ID(); ?>" class="marquee listing active"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></div>');
+      var marquee = $("#list-marquee<?php the_ID(); ?>");
+      if (!banner.hasClass("open")) {
+        banner.addClass("open");
+        <?php if($isLive == true):?>marquee.html('<a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a><a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a>');<?php endif; ?>
+        <?php if($isLive == false):?>marquee.html('<a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank"><span>*** Add to Calendar&nbsp;</span></a><a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank"><span>*** Add to Calendar&nbsp;</span></a>');<?php endif; ?>
         banner.slideDown(200);
-        marqueeEl = new Marquee(marqueeId, { direction: 'ltr', speed: 0.2, offset: '400px' });
-      } else {
-        banner.slideUp(200, function() {
-          banner.html("");
+        $(marquee).marquee({
+          duration: 40000,
+          gap: 0,
+          delayBeforeStart: 0,
+          direction: 'right',
+          duplicated: true,
+          startVisible: true
         });
-        marqueeEl = null;
+      } else {
+        banner.removeClass("open");
+        banner.slideUp(200);
+        $(marquee).marquee("DESTROY");
       }
+
     });
-    $('.<?php echo the_ID(); ?>').on("click", function() {
-      window.open("<?php echo $url ?>", '_blank');
-    })
+
   </script>
 
 </div>

@@ -1,9 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('What u doing looking here');
-  new Marquee('main-marquee', {
-    direction: 'rtl',
-    speed: 1
+  $("#main-marquee").marquee({
+    duration: 15000,
+    gap: 0,
+    delayBeforeStart: 0,
+    direction: 'left',
+    duplicated: true,
+    startVisible: true
   });
+  window.scrollTo(500, 0);
+  // Honeypot
+  $('.text-field').hide();
 });
 
 var formOpen = false;
@@ -25,7 +32,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 function loadMoreStreams(today, ajaxurl) {
   if(isSearch === false && isRan === false) {
     isRan = true;
-    console.log("yo");
+    console.log("yo: " + today);
     $.ajax({
       url : ajaxurl,
       type : 'post',
@@ -60,12 +67,10 @@ function revealPosts(time) {
   isRan = false;
 }
 
-$(".datepicker").on("change", function() {
-  console.log($(".timepicker").val());
-  var from = $(this).val().split("/");
-  var date = [from[2], from[1], from[0]].join('-');
-  $(".timestamp-h").val(date);
-})
+$.validator.addMethod('validUrl', function(value, element) {
+  var url = $.validator.methods.url.bind(this);
+  return url(value, element) || url('https://' + value, element);
+}, 'Stream URL');
 
 $("form[name='listing-form']").validate({
   rules: {
@@ -79,7 +84,7 @@ $("form[name='listing-form']").validate({
     event_time: "required",
     event_date: "required",
     event_type: "required",
-    event_url: "required",
+    event_url: { required: true, validUrl: true },
     event_language: "required",
     event_description: "required"
   },
@@ -88,7 +93,7 @@ $("form[name='listing-form']").validate({
     event_email: "Your Email",
     event_country: "Country",
     event_name: "Event Name",
-    event_time: "07:00 PM",
+    event_time: "12:00",
     event_date: dateFormat(new Date(), "dd/mm/yyyy"),
     event_type: "Event Type",
     event_url: "Stream URL",
@@ -97,10 +102,36 @@ $("form[name='listing-form']").validate({
   },
   errorPlacement: function(error, element) {
     element.attr("placeholder", error[0].outerText);
-  },
-  submitHandler: function(form) {
-    form.submit();
   }
+});
+
+$("form[name='listing-form']").submit(function(event) {
+  var isvalid = $(this).valid();
+  var form = $(this);
+  var url = form.attr('action');
+
+  if (isvalid) {
+    event.preventDefault();
+    var from = $('.datepicker').val().split("/");
+    var date = [from[2], from[1], from[0]].join('');
+    var time = $('.timepicker').val();
+    $("#timestamp-h").val(date + " " + time);
+
+    $.ajax({
+       type: "POST",
+       url: url,
+       data: form.serialize(),
+       success: function(data) {
+         $(".form-wrap").fadeOut("slow", function() {
+           $(".form-wrap").html('<h2 class="title is-text-centered">Success</h2>');
+           $(".form-wrap").fadeIn("slow");
+         });
+       },
+       error:function(data) {
+         console.warn("You have been detected as a spammer, please kindly fuck off.");
+       }
+     });
+   }
 });
 
 // CREATE
@@ -172,6 +203,39 @@ $('#searchfield').on("change paste keyup", function(e) {
   }
 });
 
+$("#searchform span").click(function(){
+  $("#searchfield").val('');
+  $(".cat-filter").removeClass("active");
+  $.get('/', {
+    s: ""
+  }, function(data) {
+    $('#upcoming-posts').html(data);
+    isSearch = false;
+  });
+});
+
+$('.cat-filter').on("click", function(e) {
+  e.preventDefault();
+  $(this).toggleClass("active");
+  $(".cat-filter").not($(this)).removeClass('active');
+  if ($(this).hasClass("active")) {
+    var category = $(this).attr("href");
+    $.get('/', {
+      s: category
+    }, function(data) {
+      $('#upcoming-posts').html(data);
+      isSearch = true;
+    });
+  } else {
+    $.get('/', {
+      s: ""
+    }, function(data) {
+      $('#upcoming-posts').html(data);
+      isSearch = true;
+    });
+  }
+});
+
 // Keyboard shortcuts
 $(document).keydown(function(e) {
   if (e.keyCode === 27) {
@@ -223,15 +287,22 @@ function toggleCreateListing(state) {
     $(".js-listing-form").slideDown();
     $(".marquee.main").addClass("invert");
     $('input.timepicker').timepicker({
-      timeFormat: "hh:mm p",
+      timeFormat: "HH:mm",
       zindex: 1001,
-      startTime: new Date(0, 0, 0, 19, 0, 0)
+      startTime: new Date(0, 0, 0, 12, 0, 0)
     });
     $('input.datepicker').datepicker({
       inline: false,
       format: 'dd/mm/yyyy'
     });
-    $('.marquee.navigation').html('<div class="left"><p> TODAYS SUPPLY is a directory for online events across the arts, design, creative world. Submit your event using the form above!</p></div><div class="right"><p> TODAYS SUPPLY is a directory for online events across the arts, design, creative world. Submit your event using the form above!</p></div>');
+    $('.marquee.navigation').html('<p> TODAYS SUPPLY is a directory for online events across the arts, design, creative world. Submit your event using the form above!</p>');
+    $(".marquee.navigation").marquee({
+      duration: 15000,
+      gap: 0,
+      delayBeforeStart: 0,
+      direction: 'left',
+      duplicated: true
+    });
   } else {
     if (isMobile === false) {
       $(document).unbind('scroll');
@@ -241,6 +312,7 @@ function toggleCreateListing(state) {
     $(".js-listing-form").slideUp();
     $(".marquee.main").removeClass("invert");
     $('.marquee.navigation').html("");
+    $(".marquee.navigation").marquee("DESTROY");
   }
 }
 

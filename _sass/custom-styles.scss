@@ -30,12 +30,11 @@
     background: darken($grey, 10%);
     color: $white;
   }
-  &.btn-dark {
-    background: $grey-dark;
-    &:hover {
-      background: darken($grey-dark, 10%);
-      color: $white;
-    }
+  &.active {
+    background: darken($grey-dark, 10%);
+  }
+  &.category {
+    margin-right: .25rem;
   }
 }
 
@@ -46,21 +45,26 @@
 
 #archive {
   position: relative;
-  top: -2rem;
-  display: none;
+  //top: -2rem;
+  display: block;
   @media (min-width: 768px) {
     display: block;
   }
   #list-item {
     cursor: auto;
   }
+  .no-archive {
+    width: 100%;
+    height: 2rem;
+    clear: both;
+  }
 }
 
 #upcoming-posts {
   margin-top: 0;
-  @media (min-width: 768px) {
-    margin-top: -2rem;
-  }
+  // @media (min-width: 768px) {
+  //   margin-top: -2rem;
+  // }
 }
 
 .pagination {
@@ -69,9 +73,34 @@
 
 #list-item {
   cursor: pointer;
-  padding: 1rem;
+  padding-top: 1.4rem;
   @media (min-width: 768px) {
-    padding: 1rem 2rem;
+    padding-top: 1rem;
+  }
+  padding-bottom: 1.5rem;
+  .column {
+    @media screen and (max-width: 768px) {
+      padding-top: .25rem;
+      padding-bottom: .25rem;
+    }
+  }
+  .countrytime {
+    .column {
+      @media screen and (max-width: 768px) {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+    }
+  }
+  > .columns {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 768px) {
+    > .columns {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
   border-bottom: 1px solid $grey-lighter;
   opacity: 0;
@@ -88,6 +117,9 @@
         visibility: visible;
       }
     }
+  }
+  .title {
+    margin-bottom: .5rem;
   }
   .country, .time {
     border: 1px solid $primary;
@@ -165,9 +197,11 @@
       font-size: 1.25em;
       display: inline-block;
       &.city {
-        margin-left: -.5rem;
+        color: #363636;
         &:before {
           content: ", ";
+          position: relative;
+          left: -.1rem;
         }
       }
       @media (min-width: 768px) {
@@ -219,8 +253,8 @@
         display: block;
         position: absolute;
         left: .4rem;
-        top: 40%;
-        transform: translateY(-40%);
+        top: 43%;
+        transform: translateY(-43%);
         width: 12px;
         height: 12px;
         background: $red;
@@ -237,6 +271,13 @@
   }
   .url-banner {
     display: none;
+    position: relative;
+    bottom: -1.5rem;
+  }
+  .btn {
+    &.category {
+      margin: .5rem .25rem;
+    }
   }
 }
 
@@ -284,7 +325,7 @@
       padding: 0;
       border-right: 1px solid $primary;
       &.parent {
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1030px) {
           border: none;
         }
       }
@@ -319,6 +360,9 @@
         &#create-listing {
           text-transform: uppercase;
         }
+        &#js-open-search {
+          margin-left: -.5rem;
+        }
       }
     }
   }
@@ -342,7 +386,7 @@
     border-top: 1px solid $primary;
     border-bottom: 1px solid $primary;
     span {
-      font-size: 5rem;
+      font-size: 5.5rem;
       font-weight: 500;
       line-height: 0.8;
       text-transform: uppercase;
@@ -355,21 +399,18 @@
     border: none;
     top: 50%;
     transform: translateY(-50%);
-    .left {
-      animation: marquee 15s linear infinite;
-    }
-    .right {
-      animation: marquee2 15s linear infinite;
-      animation-delay: 7.5s;
+    p {
+      display: inline;
     }
   }
   &.listing {
+    background: $red;
     span {
       font-size: 4rem;
       font-weight: 500;
       line-height: 1;
       text-transform: uppercase;
-      color: $red;
+      color: $white;
       display: inline-block;
       @include transform(color, 350ms);
     }
@@ -389,7 +430,7 @@
 
 .js-listing-form {
   display: none;
-  padding: 3rem 1rem 5rem;
+  padding: 7.5rem 1rem 5rem;
   @media (min-width: 768px) {
     padding: 3rem 0 4rem;
   }
@@ -423,6 +464,9 @@
     box-shadow: none;
     width: 100%;
     -webkit-appearance: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
     border-bottom: 1px solid $primary;
     @include transform(border-color, 250ms);
     &.error {
@@ -441,7 +485,7 @@
     }
   }
   textarea {
-    margin-top: 2.05rem;
+    margin-top: 2.18rem;
     padding: .5rem ;
     border: 1px solid $primary;
     min-width: 100%;
@@ -449,6 +493,9 @@
     min-height: 120px;
     max-height: 120px;
     margin-bottom: 1rem;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
   }
   select {
     position: relative;
@@ -460,6 +507,9 @@
     @media (min-width: 768px) {
       margin-bottom: 1rem;
     }
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
     box-shadow: none;
     width: 100%;
     -webkit-appearance: none;
@@ -570,3 +620,24 @@
     text-decoration: underline;
   }
 }
+
+#searchform {
+  position: relative;
+  span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .5rem .25rem;
+    font-size: 2rem;
+    line-height: 0.75;
+    color: $grey;
+    cursor: pointer;
+    @include transform(color, 150ms);
+    &:hover {
+      color: $grey-darker;
+    }
+  }
+}
+
+// Honeypot
+.input-field { display: none; }

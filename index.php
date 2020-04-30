@@ -2,54 +2,8 @@
 
 <?php
 
-$today = date('Y-m-d');
-
-// handle listing create form
-if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
-  // get fields
-  $host = $_POST['event_host'];
-  $email =  $_POST['event_email'];
-  $city = $_POST['event_city'];
-  $country = $_POST['event_country'];
-  $ip = $_SERVER['REMOTE_ADDR'];
-
-  $datetime = $_POST['stream_datetime'];
-
-  $title =  $_POST['event_name'];
-  $url =  $_POST['event_url'];
-  $language = $_POST['event_language'];
-
-  $time = $_POST['event_time'];
-  $date = $_POST['event_date'];
-
-  $timestamp = $_POST['event_timestamp'];
-
-  $description =  $_POST['event_description'];
-  $category = $_POST['event_type'];
-
-  // Add the content of the form to $post as an array
-  $post_information = array(
-      'post_title'    => $title,
-      'post_content'  => '<!-- wp:paragraph -->' . $description .'<!-- /wp:paragraph -->',
-      'post_category' => $category,
-      'meta_input' => array(
-                        'event_host' => $host,
-                        'user_email' => $email,
-                        'user_ip' => $ip,
-                        'event_url' => $url,
-                        'event_city' => $city,
-                        'event_country' => $country,
-                        'event_time' => $time,
-                        'event_date' => $date,
-                        'event_timestamp' => $timestamp,
-                        'event_language' => $language
-                      ),
-      'post_type' => 'post',
-      'post_status'   => 'pending'
-  );
-  //save the new post and return its ID
-  $post_id = wp_insert_post($post_information);
-}
+$today = date('Ymd H:i', time() - 3600);
+$atoday = date('Ymd H:i', time() - 7200);
 
 ?>
 
@@ -61,20 +15,19 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
           'posts_per_page' => 2,
           'post_status' => 'publish',
           'meta_key' => 'event_timestamp',
-          'orderby' => 'meta_value',
           'order' => 'DESC',
           'meta_query' => array(
               array(
                   'key' => 'event_timestamp',
-                  'value' => $today,
+                  'value' => $atoday,
                   'compare' => '<='
               )
            )
          )
       );
       // REVERSE POST ORDER
-      $array_rev = array_reverse($query->posts);
-      $query->posts = $array_rev;
+      // $array_rev = array_reverse($query->posts);
+      // $query->posts = $array_rev;
 
       if ( $query->have_posts() ) :
 
@@ -82,6 +35,10 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
           set_query_var("post-class", "reveal");
           get_template_part( 'template-parts/items', 'archive' );
         endwhile;
+
+      else :
+
+        echo '<div class="no-archive"></div>';
 
       endif;
 
@@ -95,15 +52,22 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
           'posts_per_page' => 5,
           'post_status' => 'publish',
           'meta_key' => 'event_timestamp',
-          'orderby' => 'meta_value',
           'order' => 'ASC',
           'meta_query' => array(
-              array(
+              'relation' => 'AND',
+              'date_query' => array(
                   'key' => 'event_timestamp',
                   'value' => $today,
                   'compare' => '>='
-              )
-           )
+              ),
+              'time_query' => array(
+                  'key' => 'event_time'
+              ),
+          ),
+          'orderby' => array(
+              'date_query' => 'ASC',
+              'time_query' => 'ASC',
+          ),
          )
       );
 

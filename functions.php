@@ -28,12 +28,13 @@ function modify_search_results_order($query) {
     return $query;
   }
   $query->query_vars['order'] = 'ASC';
-  $query->query_vars['orderby']    = 'meta_value';
+  $query->query_vars['orderby'] = 'meta_value';
+  $query->query_vars['meta_key'] = 'event_timestamp';
   $query->query_vars['meta_query'] = [
     array(
       'key'   => 'event_timestamp',
-      'value' => date('Ymd'),
-      'compare' => '<='
+      'value' => date('Ymd H:i', time() - 3600),
+      'compare' => '>='
     )
   ];
   return $query;
