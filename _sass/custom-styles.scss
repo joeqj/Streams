@@ -122,6 +122,16 @@
   }
   .title {
     margin-bottom: .5rem;
+    line-height: 1.5;
+    span {
+      padding-bottom: 0rem;
+      border-bottom: 1px solid rgba(lighten($grey-dark, 20%),0.5);
+      @include transform(all, 250ms);
+      &:hover {
+        padding-bottom: .1rem;
+        border-color: lighten($grey-dark, 20%);
+      }
+    }
   }
   .country, .time {
     border: 1px solid $primary;
@@ -179,15 +189,6 @@
       width: auto;
       margin-top: .45rem;
       line-height: 1.6;
-      span {
-        padding-bottom: 0rem;
-        border-bottom: 1px solid rgba(lighten($grey-dark, 20%),0.5);
-        @include transform(all, 250ms);
-        &:hover {
-          padding-bottom: .1rem;
-          border-color: lighten($grey-dark, 20%);
-        }
-      }
     }
     .mobile-language {
       p {

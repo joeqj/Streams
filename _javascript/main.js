@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startVisible: true
   });
   $([document.documentElement, document.body]).animate({
-    scrollTop: $("#upcoming-posts").offset().top
+    scrollTop: $('#list-item:not(.archive):first').offset().top
   }, 100);
   // Honeypot
   $('.text-field').hide();

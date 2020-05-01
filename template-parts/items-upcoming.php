@@ -67,7 +67,7 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
           </div>
         </div>
         <div class="column is-hidden-mobile is-6-desktop host">
-          <a href="#" class="name title is-5"><span><?php echo $host ?></span></a>
+          <p class="name title is-5"><?php echo $host ?></p>
           <p><?php echo $city ?></p>
         </div>
       </div>
@@ -77,7 +77,7 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
     <div class="column is-7-desktop">
       <div class="columns">
         <div class="column is-5-desktop eventtitle">
-          <p class="mt-1 title is-4"><?php echo $title ?></p>
+          <p class="mt-1 title is-4"><span><?php echo $title ?></span></p>
           <?php
             foreach ($categories as $c) {
               echo '<span class="btn category">';

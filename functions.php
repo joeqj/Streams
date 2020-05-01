@@ -33,7 +33,7 @@ function modify_search_results_order($query) {
   $query->query_vars['meta_query'] = [
     array(
       'key'   => 'event_timestamp',
-      'value' => date('Ymd H:i', time() - 3600),
+      'value' => date('Y-m-d H:i', time() - 86400),
       'compare' => '>='
     )
   ];

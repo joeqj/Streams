@@ -2397,7 +2397,19 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     opacity: 1;
     visibility: visible; }
   #list-item .title {
-    margin-bottom: .5rem; }
+    margin-bottom: .5rem;
+    line-height: 1.5; }
+    #list-item .title span {
+      padding-bottom: 0rem;
+      border-bottom: 1px solid rgba(125, 125, 125, 0.5);
+      -webkit-transition: all 250ms ease-in-out;
+      -moz-transition: all 250ms ease-in-out;
+      -ms-transition: all 250ms ease-in-out;
+      -o-transition: all 250ms ease-in-out;
+      transition: all 250ms ease-in-out; }
+      #list-item .title span:hover {
+        padding-bottom: .1rem;
+        border-color: #7d7d7d; }
   #list-item .country, #list-item .time {
     border: 1px solid #091344;
     color: #091344;
@@ -2446,17 +2458,6 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     @media (min-width: 768px) {
       #list-item .host .name {
         display: block; } }
-    #list-item .host .name span {
-      padding-bottom: 0rem;
-      border-bottom: 1px solid rgba(125, 125, 125, 0.5);
-      -webkit-transition: all 250ms ease-in-out;
-      -moz-transition: all 250ms ease-in-out;
-      -ms-transition: all 250ms ease-in-out;
-      -o-transition: all 250ms ease-in-out;
-      transition: all 250ms ease-in-out; }
-      #list-item .host .name span:hover {
-        padding-bottom: .1rem;
-        border-color: #7d7d7d; }
   #list-item .host .mobile-language p {
     color: #091344;
     font-size: .85em; }
