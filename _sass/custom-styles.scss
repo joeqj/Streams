@@ -62,9 +62,6 @@
 
 #upcoming-posts {
   margin-top: 0;
-  // @media (min-width: 768px) {
-  //   margin-top: -2rem;
-  // }
 }
 
 .pagination {
@@ -78,8 +75,10 @@
   @media (min-width: 768px) {
     padding-top: 1rem;
     padding-bottom: 1rem;
+    &:last-of-type {
+      padding-bottom: 1.5rem;
+    }
   }
-
   .column {
     @media screen and (max-width: 768px) {
       padding-top: .25rem;
@@ -120,10 +119,12 @@
       }
     }
   }
-  .title {
+  .eventtitle {
     margin-bottom: .5rem;
     line-height: 1.5;
-    span {
+    > p > span {
+      line-height: 1.5;
+      font-size: $theme-size-1;
       padding-bottom: 0rem;
       border-bottom: 1px solid rgba(lighten($grey-dark, 20%),0.5);
       @include transform(all, 250ms);
@@ -187,8 +188,8 @@
         display: block;
       }
       width: auto;
-      margin-top: .45rem;
-      line-height: 1.6;
+      line-height: 1.5;
+      font-size: $theme-size-1;
     }
     .mobile-language {
       p {
@@ -197,7 +198,6 @@
       }
     }
     p {
-      font-size: 1.25em;
       display: inline-block;
       &.city {
         color: #363636;
@@ -206,9 +206,6 @@
           position: relative;
           left: -.1rem;
         }
-      }
-      @media (min-width: 768px) {
-        font-size: 1em;
       }
     }
   }
@@ -241,7 +238,7 @@
       margin-top: .35rem;
     }
     p {
-      font-size: 85%;
+      font-size: $theme-size-2;
     }
   }
   // Live modifications
@@ -283,7 +280,7 @@
   .url-banner {
     display: none;
     position: relative;
-    bottom: -1.5rem;
+    bottom: -.5rem;
   }
   .btn {
     &.category {
@@ -399,7 +396,7 @@
     span {
       font-size: 5.5rem;
       font-weight: 500;
-      line-height: 0.8;
+      line-height: 0.75;
       text-transform: uppercase;
       color: $primary;
       display: inline-block;
@@ -412,11 +409,20 @@
     transform: translateY(-50%);
     p {
       display: inline;
+      &.success {
+        color: #64DA79;
+      }
     }
   }
   &.listing {
-    background: $red;
-    span {
+    background: $white;
+    padding: .25rem 0 .75rem;
+    &:hover {
+      span {
+        color: $primary;
+      }
+    }
+    span, a {
       font-size: 4rem;
       font-weight: 500;
       line-height: 1;
@@ -424,6 +430,20 @@
       color: $white;
       display: inline-block;
       @include transform(color, 350ms);
+      font-family: $cta-font;
+      font-style: normal;
+      font-weight: 300;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: $primary;
+    }
+    span {
+      border-bottom: 2px solid $white;
+    }
+    &.live {
+      background: $red;
+      span, a {
+        -webkit-text-stroke-width: 0;
+      }
     }
   }
 
@@ -615,7 +635,7 @@
   text-align: left;
   p {
     color: $primary;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     &:first-of-type {
       margin-top: 0.25rem;
     }

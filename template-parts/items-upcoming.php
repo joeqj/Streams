@@ -62,12 +62,12 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
               <span class="time" id="js-time-<?php the_ID(); ?>"></span>
             </div>
             <div class="column is-4-mobile date is-visible-mobile is-hidden-tablet">
-              <p class="mt-2 is-5"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
+              <p class="mt-2"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
             </div>
           </div>
         </div>
         <div class="column is-hidden-mobile is-6-desktop host">
-          <p class="name title is-5"><?php echo $host ?></p>
+          <p class="name"><?php echo $host ?></p>
           <p><?php echo $city ?></p>
         </div>
       </div>
@@ -77,7 +77,7 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
     <div class="column is-7-desktop">
       <div class="columns">
         <div class="column is-5-desktop eventtitle">
-          <p class="mt-1 title is-4"><span><?php echo $title ?></span></p>
+          <p><span><?php echo $title ?></span></p>
           <?php
             foreach ($categories as $c) {
               echo '<span class="btn category">';
@@ -87,7 +87,7 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
           ?>
         </div>
         <div class="column is-visible-mobile is-hidden-tablet pl-2 host">
-          <a href="#" class="name title is-5"><span><?php echo $host ?></span></a>
+          <a href="#" class="name"><span><?php echo $host ?></span></a>
           <p class="city"><?php echo $city ?></p>
 
           <div class="mobile-language is-visible-mobile is-hidden-tablet">
@@ -134,23 +134,24 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
     }
 
     $('.<?php the_ID(); ?>').on("click", function(e) {
-      e.preventDefault();
       var that = $(this);
       var banner = $(this).find(".url-banner");
       var marquee = $("#list-marquee<?php the_ID(); ?>");
       if (!banner.hasClass("open")) {
         banner.addClass("open");
         if (that.hasClass("is-live")) {
-          marquee.html('<a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a><a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a>');
+          marquee.addClass("live");
+          marquee.html('<a href="<?php echo $url ?>"><span>LIVE!!! ~ WATCH NOW ~ !!!</span> *** <span>ON<?php echo $source ?></span></a>');
         } else if (that.hasClass("archive")) {
-          marquee.html('<a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a><a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a>');
+          marquee.addClass("live");
+          marquee.html('<a href="<?php echo $url ?>"><span>LIVE!!! ~ WATCH NOW ~ !!!</span> *** <span>ON<?php echo $source ?></span></a>');
         } else {
-          marquee.html('<a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank"><span>*** Add to Calendar&nbsp;</span></a><a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank"><span>*** Add to Calendar&nbsp;</span></a>');
+          marquee.html('<a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank">*** <span>DON’T MISS THIS! ~ </span> </a><a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank"><span>ADD TO CALENDAR</span></a>');
         }
         banner.slideDown(200);
         $(marquee).marquee({
-          duration: 40000,
-          gap: 0,
+          duration: 12000,
+          gap: 12,
           delayBeforeStart: 0,
           direction: 'right',
           duplicated: true,

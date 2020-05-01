@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('What u doing looking here');
   $("#main-marquee").marquee({
     duration: 15000,
-    gap: 0,
+    gap: 12,
     delayBeforeStart: 0,
     direction: 'left',
     duplicated: true,
@@ -91,10 +91,8 @@ function revealPosts(time) {
   var i = 0;
   setInterval(function() {
     if (i >= posts.length) return false;
-
     var el = posts[i];
     $(el).addClass("reveal");
-
     i++;
   }, time);
   isRan = false;
@@ -151,13 +149,10 @@ $("form[name='listing-form']").submit(function(event) {
     var time = $('.timepicker').val();
     if (locArray["long_name"] && locArray["long_name"] && locArray["long_name"] && locArray["utc_offset"]) {
       date = moment(date + " " + time, "YYYY-MM-DD HH:mm").utc().utcOffset(locArray["utc_offset"]);
-
       $("#timestamp-h").val(date.format("YYYY-MM-DD HH:mm"));
       $("input[name='event_date']").val(date.format("YYYY-MM-DD"));
       $("input[name='event_time']").val(date.format("HH:mm"));
-
       $("input[name='event_city']").val(locArray["long_name"]);
-
       if (locArray["short_name"].toString() === "GB") {
         $("input[name='event_country']").val("UK");
       } else {
@@ -170,9 +165,14 @@ $("form[name='listing-form']").submit(function(event) {
        url: url,
        data: form.serialize(),
        success: function(data) {
-         $(".form-wrap").fadeOut("slow", function() {
-           $(".form-wrap").html('<h2 class="title is-text-centered">Success</h2>');
-           $(".form-wrap").fadeIn("slow");
+         $("form[name='listing-form']").trigger("reset");
+         $('.marquee.navigation').html('<p class="success">GREAT! ~ We will approve your listing soon. To edit, email: <a href="mailto:team@todays.supply">team@todays.supply</a></p>');
+         $(".marquee.navigation").marquee({
+           duration: 15000,
+           gap: 0,
+           delayBeforeStart: 0,
+           direction: 'left',
+           duplicated: true
          });
        },
        error:function(data) {
@@ -305,21 +305,21 @@ $(document).keydown(function(e) {
 });
 
 // --- FUNCTIONS ---
-function listItemUrlBanner(event, that, uid, url, source) {
-  var banner = $(that).find(".url-banner");
-  var marqueeId = "list-marquee" + uid;
-  var marqueeEl;
-  if(event.type == "mouseenter") {
-    banner.html('<div id="list-marquee' + uid + ' class="marquee listing active"><span>*** Watch Now On ' + source + '&nbsp;</span></div>');
-    banner.slideDown(200);
-    marqueeEl = new Marquee(marqueeId, { direction: 'ltr', speed: 0.2, offset: '400px' });
-  } else {
-    banner.slideUp(200, function() {
-      banner.html("");
-    });
-    marqueeEl = null;
-  }
-}
+// function listItemUrlBanner(event, that, uid, url, source) {
+//   var banner = $(that).find(".url-banner");
+//   var marqueeId = "list-marquee" + uid;
+//   var marqueeEl;
+//   if(event.type == "mouseenter") {
+//     banner.html('<div id="list-marquee' + uid + ' class="marquee listing active"><span>*** Watch Now On ' + source + '&nbsp;</span></div>');
+//     banner.slideDown(200);
+//     marqueeEl = new Marquee(marqueeId, { direction: 'ltr', speed: 0.2, offset: '400px' });
+//   } else {
+//     banner.slideUp(200, function() {
+//       banner.html("");
+//     });
+//     marqueeEl = null;
+//   }
+// }
 
 function toggleCreateListing(state) {
   formOpen = !formOpen;
@@ -343,7 +343,7 @@ function toggleCreateListing(state) {
       inline: false,
       format: 'dd/MM/yyyy'
     });
-    $('.marquee.navigation').html('<p> TODAYS SUPPLY is a directory for online events across the arts, design, creative world. Submit your event using the form above!</p>');
+    $('.marquee.navigation').html('<p>TODAYS SUPPLY is a directory for online events across the arts, design, creative world. Submit your event using the form above!</p>');
     $(".marquee.navigation").marquee({
       duration: 15000,
       gap: 0,

@@ -1,4 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap");
+@import url("https://use.typekit.net/qek6srt.css");
+@import url("https://use.typekit.net/qek6srt.css");
+@font-face {
+  font-family: 'Studio Feixen Sans';
+  src: url("../assets/font/StudioFeixenSans-Regular_1.eot");
+  src: url("../assets/font/StudioFeixenSans-Regular_1.eot?#iefix") format("embedded-opentype"), url("../assets/font/StudioFeixenSans-Regular_1.woff2") format("woff2"), url("../assets/font/StudioFeixenSans-Regular_1.woff") format("woff"), url("../assets/font/StudioFeixenSans-Regular_1.ttf") format("truetype"), url("../assets/font/StudioFeixenSans-Regular_1.svg#StudioFeixenSans-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
 @font-face {
   font-family: 'Studio Feixen Sans';
   src: url("../assets/font/StudioFeixenSans-Regular_1.eot");
@@ -132,7 +140,7 @@ button,
 input,
 select,
 textarea {
-  font-family: "Studio Feixen Sans", monospace; }
+  font-family: "Studio Feixen Sans", sans-serif; }
 
 code,
 pre {
@@ -141,7 +149,7 @@ pre {
   font-family: monospace; }
 
 body {
-  color: #0a0a0a;
+  color: #40486B;
   font-size: 1em;
   font-weight: 400;
   line-height: 1.5; }
@@ -194,7 +202,7 @@ fieldset {
 pre {
   -webkit-overflow-scrolling: touch;
   background-color: whitesmoke;
-  color: #0a0a0a;
+  color: #40486B;
   font-size: 0.875em;
   overflow-x: auto;
   padding: 1.25rem 1.5rem;
@@ -675,13 +683,13 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   font-weight: 700 !important; }
 
 .is-family-primary {
-  font-family: "Studio Feixen Sans", monospace !important; }
+  font-family: "Studio Feixen Sans", sans-serif !important; }
 
 .is-family-secondary {
-  font-family: "Studio Feixen Sans", monospace !important; }
+  font-family: "Studio Feixen Sans", sans-serif !important; }
 
 .is-family-sans-serif {
-  font-family: "Studio Feixen Sans", monospace !important; }
+  font-family: "Studio Feixen Sans", sans-serif !important; }
 
 .is-family-monospace {
   font-family: monospace !important; }
@@ -2154,7 +2162,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
 
 .title {
   color: #363636;
-  font-family: "Studio Feixen Sans", monospace;
+  font-family: "Studio Feixen Sans", sans-serif;
   font-size: 2rem;
   font-weight: 500;
   line-height: 1.125; }
@@ -2181,7 +2189,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     font-size: 0.75rem; }
 
 .subtitle {
-  color: #0a0a0a;
+  color: #40486B;
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.25; }
@@ -2271,7 +2279,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   display: block;
   padding: 0.2em 0.4em;
   text-decoration: none;
-  font-family: "Studio Feixen Sans", monospace; }
+  font-family: "Studio Feixen Sans", sans-serif; }
 
 .ui-timepicker-standard .ui-state-hover {
   /* overwrites .ui-state-hover */
@@ -2374,7 +2382,9 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   @media (min-width: 768px) {
     #list-item {
       padding-top: 1rem;
-      padding-bottom: 1rem; } }
+      padding-bottom: 1rem; }
+      #list-item:last-of-type {
+        padding-bottom: 1.5rem; } }
   @media screen and (max-width: 768px) {
     #list-item .column {
       padding-top: .25rem;
@@ -2396,10 +2406,12 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   #list-item:hover .language p, #list-item.archive .language p {
     opacity: 1;
     visibility: visible; }
-  #list-item .title {
+  #list-item .eventtitle {
     margin-bottom: .5rem;
     line-height: 1.5; }
-    #list-item .title span {
+    #list-item .eventtitle > p > span {
+      line-height: 1.5;
+      font-size: 1.88rem;
       padding-bottom: 0rem;
       border-bottom: 1px solid rgba(125, 125, 125, 0.5);
       -webkit-transition: all 250ms ease-in-out;
@@ -2407,7 +2419,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
       -ms-transition: all 250ms ease-in-out;
       -o-transition: all 250ms ease-in-out;
       transition: all 250ms ease-in-out; }
-      #list-item .title span:hover {
+      #list-item .eventtitle > p > span:hover {
         padding-bottom: .1rem;
         border-color: #7d7d7d; }
   #list-item .country, #list-item .time {
@@ -2453,8 +2465,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   #list-item .host .name {
     display: inline-block;
     width: auto;
-    margin-top: .45rem;
-    line-height: 1.6; }
+    line-height: 1.5;
+    font-size: 1.88rem; }
     @media (min-width: 768px) {
       #list-item .host .name {
         display: block; } }
@@ -2462,7 +2474,6 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     color: #091344;
     font-size: .85em; }
   #list-item .host p {
-    font-size: 1.25em;
     display: inline-block; }
     #list-item .host p.city {
       color: #363636; }
@@ -2470,9 +2481,6 @@ a.has-text-danger:hover, a.has-text-danger:focus {
         content: ", ";
         position: relative;
         left: -.1rem; }
-    @media (min-width: 768px) {
-      #list-item .host p {
-        font-size: 1em; } }
   #list-item .language {
     position: relative;
     text-align: center; }
@@ -2500,7 +2508,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
       padding-left: .5rem;
       margin-top: .35rem; } }
   #list-item .description p {
-    font-size: 85%; }
+    font-size: 1.1rem; }
   #list-item.is-live .country, #list-item.is-live .time {
     border-color: #091344 !important;
     color: #091344; }
@@ -2534,7 +2542,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   #list-item .url-banner {
     display: none;
     position: relative;
-    bottom: -1.5rem; }
+    bottom: -.5rem; }
   #list-item .btn.category {
     margin: .5rem .25rem; }
 
@@ -2637,7 +2645,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     .marquee.main span {
       font-size: 5.5rem;
       font-weight: 500;
-      line-height: 0.8;
+      line-height: 0.75;
       text-transform: uppercase;
       color: #091344;
       display: inline-block;
@@ -2652,9 +2660,14 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     transform: translateY(-50%); }
     .marquee.navigation p {
       display: inline; }
+      .marquee.navigation p.success {
+        color: #64DA79; }
   .marquee.listing {
-    background: #e60000; }
-    .marquee.listing span {
+    background: white;
+    padding: .25rem 0 .75rem; }
+    .marquee.listing:hover span {
+      color: #091344; }
+    .marquee.listing span, .marquee.listing a {
       font-size: 4rem;
       font-weight: 500;
       line-height: 1;
@@ -2665,7 +2678,18 @@ a.has-text-danger:hover, a.has-text-danger:focus {
       -moz-transition: color 350ms ease-in-out;
       -ms-transition: color 350ms ease-in-out;
       -o-transition: color 350ms ease-in-out;
-      transition: color 350ms ease-in-out; }
+      transition: color 350ms ease-in-out;
+      font-family: "classica-pro", serif;
+      font-style: normal;
+      font-weight: 300;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: #091344; }
+    .marquee.listing span {
+      border-bottom: 2px solid white; }
+    .marquee.listing.live {
+      background: #e60000; }
+      .marquee.listing.live span, .marquee.listing.live a {
+        -webkit-text-stroke-width: 0; }
   .marquee p {
     font-size: .9rem !important;
     color: #0a0a0a; }
@@ -2832,7 +2856,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
       overflow-y: auto; } }
   .js-info p {
     color: #091344;
-    margin-top: 1rem; }
+    margin-top: 1.5rem; }
     .js-info p:first-of-type {
       margin-top: 0.25rem; }
     .js-info p.big {

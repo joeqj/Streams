@@ -11,7 +11,7 @@
             <input type="hidden" name="event_city">
           </div>
           <div class="column is-5">
-            <input type="text" name="event_name" placeholder="Event Name">
+            <input type="text" name="event_name" placeholder="Event Name" maxlength="70">
             <div class="columns is-mobile datetimecol">
               <div class="column is-3">
                 <input type="text" class="timepicker" placeholder="12:00" name="frontend_time" autocomplete="off">
@@ -31,11 +31,11 @@
                 </select>
               </div>
             </div>
-            <input type="text" name="event_url" placeholder="Stream URL" autocomplete="off" required>
+            <input type="text" name="event_url" placeholder="Stream URL / Event page" autocomplete="off" required>
             <input type="text" name="event_language" placeholder="Event Language" required>
           </div>
           <div class="column is-4">
-            <textarea name="event_description" rows="6" maxlength="200" placeholder="Tell us about your event"></textarea>
+            <textarea name="event_description" rows="6" maxlength="260" placeholder="Tell us about your event"></textarea>
             <div class="input-field">
               Please leave this blank
               <input type="text" name="contact" value="" />

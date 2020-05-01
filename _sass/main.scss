@@ -4,7 +4,20 @@
 
 // 1. Import the initial variables
 @import "../node_modules/bulma/sass/utilities/initial-variables";
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap');
+@import url("https://use.typekit.net/qek6srt.css");
+@import url("https://use.typekit.net/qek6srt.css");
+
+@font-face {
+    font-family: 'Studio Feixen Sans';
+    src: url('../assets/font/StudioFeixenSans-Regular_1.eot');
+    src: url('../assets/font/StudioFeixenSans-Regular_1.eot?#iefix') format('embedded-opentype'),
+        url('../assets/font/StudioFeixenSans-Regular_1.woff2') format('woff2'),
+        url('../assets/font/StudioFeixenSans-Regular_1.woff') format('woff'),
+        url('../assets/font/StudioFeixenSans-Regular_1.ttf') format('truetype'),
+        url('../assets/font/StudioFeixenSans-Regular_1.svg#StudioFeixenSans-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 @font-face {
     font-family: 'Studio Feixen Sans';
@@ -38,12 +51,16 @@ $pink: #fc3fff;
 $pink-invert: #fff;
 $red: #e60000;
 // Update the font families
-$family-sans-serif: 'Studio Feixen Sans', monospace;
+$family-sans-serif: 'Studio Feixen Sans', sans-serif;
 $title-family: $family-sans-serif;
 $title-weight: 500;
+$cta-font: 'classica-pro', serif;
+
+$theme-size-1: 1.88rem;
+$theme-size-2: 1.1rem;
 
 $link: $black;
-$text: $black;
+$text: #40486B;
 
 // 3. Set the derived variables
 // Use the new pink as the primary color
