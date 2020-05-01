@@ -114,8 +114,7 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
     var timestamp<?php the_ID(); ?> = "<?php echo $timestamp ?>";
     var local<?php the_ID(); ?> = moment.utc(timestamp<?php the_ID(); ?>).local().format('YYYY-MM-DD HH:mm');
     var d<?php the_ID(); ?> = new Date(local<?php the_ID(); ?>);
-    var f<?php the_ID(); ?> = d<?php the_ID(); ?>.toLocaleDateString().split("/");
-    var date<?php the_ID(); ?> = f<?php the_ID(); ?>[0] + " / " + f<?php the_ID(); ?>[1];
+    var date<?php the_ID(); ?> = moment(d<?php the_ID(); ?>).format("DD-MMM");
 
     var s<?php the_ID(); ?> = d<?php the_ID(); ?>.toLocaleTimeString();
     var t<?php the_ID(); ?> = s<?php the_ID(); ?>.split(":");
