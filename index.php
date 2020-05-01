@@ -1,55 +1,13 @@
 <?php get_header(); ?>
 
-<?php
-
-$today = date('Ymd H:i', time() - 3600);
-$atoday = date('Ymd H:i', time() - 7200);
-
-?>
+<?php $today = date('Y-m-d H:i', time() - 86400); ?>
 
 <section id="main">
-  <div id="archive">
-    <?php
-      $query = new WP_Query(
-        array(
-          'posts_per_page' => 2,
-          'post_status' => 'publish',
-          'meta_key' => 'event_timestamp',
-          'order' => 'DESC',
-          'meta_query' => array(
-              array(
-                  'key' => 'event_timestamp',
-                  'value' => $atoday,
-                  'compare' => '<='
-              )
-           )
-         )
-      );
-      // REVERSE POST ORDER
-      // $array_rev = array_reverse($query->posts);
-      // $query->posts = $array_rev;
-
-      if ( $query->have_posts() ) :
-
-        while ( $query->have_posts() ) : $query->the_post();
-          set_query_var("post-class", "reveal");
-          get_template_part( 'template-parts/items', 'archive' );
-        endwhile;
-
-      else :
-
-        echo '<div class="no-archive"></div>';
-
-      endif;
-
-      wp_reset_postdata();
-    ?>
-  </div>
   <div id="upcoming-posts">
     <?php
       $query = new WP_Query(
         array(
-          'posts_per_page' => 5,
+          'posts_per_page' => 10,
           'post_status' => 'publish',
           'meta_key' => 'event_timestamp',
           'order' => 'ASC',

@@ -35,7 +35,8 @@ $meta_date = get_post_meta(get_the_ID(), 'event_date', true);
 $timestamp = get_post_meta(get_the_ID(), 'event_timestamp', true);
 
 $time = preg_replace("/[^0-9:]/", "", $meta_time);
-$date = explode("/", $meta_date);
+$newDate = str_replace('/', '-', $meta_date );
+$date = date("d M", strtotime($newDate));
 
 $categories = get_the_category();
 
@@ -46,7 +47,7 @@ $categories = get_the_category();
   <div class="columns">
     <!-- date / title column -->
     <div class="column is-1 is-hidden-mobile date">
-      <p class="mt-1 is-5"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
+      <p class="mt-1 is-5"><?php echo $date ?></p>
     </div>
     <!-- language / time column -->
     <div class="column is-4-desktop">

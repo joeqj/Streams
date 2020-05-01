@@ -74,10 +74,12 @@
 #list-item {
   cursor: pointer;
   padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
   @media (min-width: 768px) {
     padding-top: 1rem;
+    padding-bottom: 1rem;
   }
-  padding-bottom: 1.5rem;
+
   .column {
     @media screen and (max-width: 768px) {
       padding-top: .25rem;

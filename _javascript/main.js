@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     duplicated: true,
     startVisible: true
   });
-  window.scrollTo(500, 0);
+  $([document.documentElement, document.body]).animate({
+    scrollTop: $("#upcoming-posts").offset().top
+  }, 100);
   // Honeypot
   $('.text-field').hide();
 });
@@ -28,11 +30,42 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
     isMobile = true;
 }
 
+// location handling
+var input = document.getElementById('gLoc');
+var options = {
+  types: ['(cities)']
+};
+
+var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+var componentForm = {
+  route: 'long_name',
+  locality: 'long_name',
+  city: 'long_name',
+  country: 'short_name'
+};
+
+var locArray = [];
+
+google.maps.event.addListener(autocomplete, 'place_changed', function () {
+  locArray = [];
+  var place = autocomplete.getPlace();
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      locArray[componentForm[addressType]] = [];
+      locArray[componentForm[addressType]].push(val);
+    }
+  }
+  locArray["utc_offset"] = [];
+  locArray["utc_offset"].push(place.utc_offset_minutes);
+});
+
 // Infinite Scroll
 function loadMoreStreams(today, ajaxurl) {
   if(isSearch === false && isRan === false) {
     isRan = true;
-    console.log("yo: " + today);
     $.ajax({
       url : ajaxurl,
       type : 'post',
@@ -79,10 +112,10 @@ $("form[name='listing-form']").validate({
       required: true,
       email: true
     },
-    event_country: "required",
+    event_loc_c: "required",
     event_name: "required",
-    event_time: "required",
-    event_date: "required",
+    frontend_time: "required",
+    frontend_date: "required",
     event_type: "required",
     event_url: { required: true, validUrl: true },
     event_language: "required",
@@ -91,10 +124,10 @@ $("form[name='listing-form']").validate({
   messages: {
     event_host: "Host",
     event_email: "Your Email",
-    event_country: "Country",
+    event_loc_c: "Enter a location",
     event_name: "Event Name",
-    event_time: "12:00",
-    event_date: dateFormat(new Date(), "dd/mm/yyyy"),
+    frontend_time: "12:00",
+    frontend_date: moment().format("DD/MM/YYYY"),
     event_type: "Event Type",
     event_url: "Stream URL",
     event_language: "Event Language",
@@ -112,10 +145,25 @@ $("form[name='listing-form']").submit(function(event) {
 
   if (isvalid) {
     event.preventDefault();
+    var date;
     var from = $('.datepicker').val().split("/");
-    var date = [from[2], from[1], from[0]].join('');
+    var date = [from[2], from[1], from[0]].join('-');
     var time = $('.timepicker').val();
-    $("#timestamp-h").val(date + " " + time);
+    if (locArray["long_name"] && locArray["long_name"] && locArray["long_name"] && locArray["utc_offset"]) {
+      date = moment(date + " " + time, "YYYY-MM-DD HH:mm").utc().utcOffset(locArray["utc_offset"]);
+
+      $("#timestamp-h").val(date.format("YYYY-MM-DD HH:mm"));
+      $("input[name='event_date']").val(date.format("YYYY-MM-DD"));
+      $("input[name='event_time']").val(date.format("HH:mm"));
+
+      $("input[name='event_city']").val(locArray["long_name"]);
+
+      if (locArray["short_name"].toString() === "GB") {
+        $("input[name='event_country']").val("UK");
+      } else {
+        $("input[name='event_country']").val(locArray["short_name"]);
+      }
+    }
 
     $.ajax({
        type: "POST",
@@ -293,7 +341,7 @@ function toggleCreateListing(state) {
     });
     $('input.datepicker').datepicker({
       inline: false,
-      format: 'dd/mm/yyyy'
+      format: 'dd/MM/yyyy'
     });
     $('.marquee.navigation').html('<p> TODAYS SUPPLY is a directory for online events across the arts, design, creative world. Submit your event using the form above!</p>');
     $(".marquee.navigation").marquee({

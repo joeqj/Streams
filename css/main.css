@@ -2362,7 +2362,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
 #list-item {
   cursor: pointer;
   padding-top: 1.4rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1.4rem;
   border-bottom: 1px solid #dbdbdb;
   opacity: 0;
   visibility: hidden;
@@ -2373,7 +2373,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   transition: opacity 250ms ease-in-out; }
   @media (min-width: 768px) {
     #list-item {
-      padding-top: 1rem; } }
+      padding-top: 1rem;
+      padding-bottom: 1rem; } }
   @media screen and (max-width: 768px) {
     #list-item .column {
       padding-top: .25rem;

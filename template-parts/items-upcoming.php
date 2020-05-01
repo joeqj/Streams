@@ -1,8 +1,4 @@
 <?php
-
-$today = date('Ymd h', time() + 3600);
-$isLive = false;
-
 // get variables
 $title = get_the_title();
 $host = get_post_meta(get_the_ID(), 'event_host', true);
@@ -36,7 +32,9 @@ $meta_date = get_post_meta(get_the_ID(), 'event_date', true);
 $timestamp = get_post_meta(get_the_ID(), 'event_timestamp', true);
 
 $time = preg_replace("/[^0-9:]/", "", $meta_time);
-$date = explode("/", $meta_date);
+
+$newDate = str_replace('/', '-', $meta_date );
+$date = date("d M", strtotime($newDate));
 
 $categories = get_the_category();
 
@@ -44,16 +42,13 @@ $calendarDate = explode(" ", $timestamp);
 $calendarTime = preg_replace("/[: ]/", "", $calendarDate[1]);
 $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'.$calendarTime.'00/'.$calendarDate[0].'T'.$calendarTime.'00&ctz=London/England&details='.$url.'&location='.$city.', '.$country.'&trp=false&sprop=&sprop=name:';
 
-if(date("Ymd h", strtotime($timestamp)) == $today) {
-  $isLive = true;
-}
-
 ?>
-<div id="list-item" class="<?php the_ID(); ?> <?php echo get_query_var("post-class") ?><?php if($isLive == true):?> is-live<?php endif; ?>">
+
+<div id="list-item" class="<?php the_ID(); ?> <?php echo get_query_var("post-class") ?>">
   <div class="columns">
     <!-- date / title column -->
     <div class="column is-1 is-hidden-mobile date">
-      <p class="mt-1 is-5"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
+      <p class="mt-1 is-5"><span id="js-date-<?php the_ID(); ?>"></span></p>
     </div>
     <!-- language / time column -->
     <div class="column is-4-desktop">
@@ -64,7 +59,7 @@ if(date("Ymd h", strtotime($timestamp)) == $today) {
               <div class="country"><span><?php echo $country ?></span></div>
             </div>
             <div class="column is-5-mobile is-8-desktop">
-              <span class="time"><?php echo $time ?></span>
+              <span class="time" id="js-time-<?php the_ID(); ?>"></span>
             </div>
             <div class="column is-4-mobile date is-visible-mobile is-hidden-tablet">
               <p class="mt-2 is-5"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
@@ -114,6 +109,31 @@ if(date("Ymd h", strtotime($timestamp)) == $today) {
 
     </div>
   </div>
+
+  <script type="text/javascript">
+    var timestamp<?php the_ID(); ?> = "<?php echo $timestamp ?>";
+    var local<?php the_ID(); ?> = moment.utc(timestamp<?php the_ID(); ?>).local().format('YYYY-MM-DD HH:mm');
+    var d<?php the_ID(); ?> = new Date(local<?php the_ID(); ?>);
+    var f<?php the_ID(); ?> = d<?php the_ID(); ?>.toLocaleDateString().split("/");
+    var date<?php the_ID(); ?> = f<?php the_ID(); ?>[0] + " / " + f<?php the_ID(); ?>[1];
+
+    var s<?php the_ID(); ?> = d<?php the_ID(); ?>.toLocaleTimeString();
+    var t<?php the_ID(); ?> = s<?php the_ID(); ?>.split(":");
+    var time<?php the_ID(); ?> = t<?php the_ID(); ?>[0] + ":" + t<?php the_ID(); ?>[1];
+
+    $("#js-date-<?php the_ID(); ?>").html(date<?php the_ID(); ?>);
+    $("#js-time-<?php the_ID(); ?>").html(time<?php the_ID(); ?>);
+
+    var localDate<?php the_ID(); ?> = new moment().format("YYYY-MM-DD HH");
+    var serverDate<?php the_ID(); ?> = new moment(local<?php the_ID(); ?>).format("YYYY-MM-DD HH");
+
+    if (localDate<?php the_ID(); ?> == serverDate<?php the_ID(); ?>) {
+      $("#list-item.<?php the_ID(); ?>").addClass("is-live");
+    }
+    if (localDate<?php the_ID(); ?> > serverDate<?php the_ID(); ?>) {
+      $("#list-item.<?php the_ID(); ?>").addClass("archive");
+    }
+  </script>
 
   <script type="text/javascript">
     $('.<?php the_ID(); ?>').on("click", function(e) {
