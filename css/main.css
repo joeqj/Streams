@@ -2337,7 +2337,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     margin-right: .25rem; }
 
 #main {
-  margin-bottom: 10rem;
+  margin-bottom: 13.5rem;
   overflow: hidden; }
 
 #archive {
@@ -2517,9 +2517,19 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     -webkit-border-radius: 500px; }
   #list-item.archive {
     opacity: 0.5;
-    text-decoration: line-through; }
+    text-decoration: line-through;
+    -webkit-transition: opacity 250ms ease-in-out;
+    -moz-transition: opacity 250ms ease-in-out;
+    -ms-transition: opacity 250ms ease-in-out;
+    -o-transition: opacity 250ms ease-in-out;
+    transition: opacity 250ms ease-in-out; }
     #list-item.archive .country, #list-item.archive .time, #list-item.archive .username {
       text-decoration: line-through; }
+    #list-item.archive:hover {
+      opacity: 1;
+      text-decoration: none; }
+      #list-item.archive:hover .country, #list-item.archive:hover .time, #list-item.archive:hover .username {
+        text-decoration: none; }
   #list-item .url-banner {
     display: none;
     position: relative;

@@ -39,7 +39,7 @@
 }
 
 #main {
-  margin-bottom: 10rem;
+  margin-bottom: 13.5rem;
   overflow: hidden;
 }
 
@@ -267,8 +267,16 @@
   &.archive {
     opacity: 0.5;
     text-decoration: line-through;
+    @include transform(opacity, 250ms);
     .country, .time, .username {
       text-decoration: line-through;
+    }
+    &:hover {
+      opacity: 1;
+      text-decoration: none;
+      .country, .time, .username {
+        text-decoration: none;
+      }
     }
   }
   .url-banner {

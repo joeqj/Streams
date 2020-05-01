@@ -132,17 +132,21 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
     if (localDate<?php the_ID(); ?> > serverDate<?php the_ID(); ?>) {
       $("#list-item.<?php the_ID(); ?>").addClass("archive");
     }
-  </script>
 
-  <script type="text/javascript">
     $('.<?php the_ID(); ?>').on("click", function(e) {
       e.preventDefault();
+      var that = $(this);
       var banner = $(this).find(".url-banner");
       var marquee = $("#list-marquee<?php the_ID(); ?>");
       if (!banner.hasClass("open")) {
         banner.addClass("open");
-        <?php if($isLive == true):?>marquee.html('<a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a><a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a>');<?php endif; ?>
-        <?php if($isLive == false):?>marquee.html('<a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank"><span>*** Add to Calendar&nbsp;</span></a><a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank"><span>*** Add to Calendar&nbsp;</span></a>');<?php endif; ?>
+        if (that.hasClass("is-live")) {
+          marquee.html('<a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a><a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a>');
+        } else if (that.hasClass("archive")) {
+          marquee.html('<a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a><a href="<?php echo $url ?>"><span>*** Watch Now On<?php echo $source ?>&nbsp;</span></a>');
+        } else {
+          marquee.html('<a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank"><span>*** Add to Calendar&nbsp;</span></a><a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank"><span>*** Add to Calendar&nbsp;</span></a>');
+        }
         banner.slideDown(200);
         $(marquee).marquee({
           duration: 40000,
