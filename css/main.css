@@ -2329,6 +2329,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   color: white;
   display: inline-block;
   padding: .2rem .75rem;
+  font-size: 0.9rem;
   border-radius: 500px;
   -webkit-border-radius: 500px;
   -webkit-transition: background 200ms ease-in-out;
@@ -2408,11 +2409,13 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     visibility: visible; }
   #list-item .eventtitle {
     margin-bottom: .5rem;
-    line-height: 1.5; }
+    line-height: 1.4; }
     #list-item .eventtitle > p > span {
-      line-height: 1.5;
-      font-size: 1.88rem;
-      padding-bottom: 0rem;
+      line-height: 1.2;
+      font-size: 1.18rem;
+      padding-bottom: 0;
+      display: inline-block;
+      margin: 4px 0 5px;
       border-bottom: 1px solid rgba(125, 125, 125, 0.5);
       -webkit-transition: all 250ms ease-in-out;
       -moz-transition: all 250ms ease-in-out;
@@ -2439,11 +2442,12 @@ a.has-text-danger:hover, a.has-text-danger:focus {
       margin: auto;
       transform: translateY(-50%); }
   #list-item .date {
-    margin-top: .75rem; }
+    margin-top: .75rem;
+    font-size: 0.9rem; }
     @media (min-width: 768px) {
       #list-item .date {
         text-align: center;
-        margin-top: 0; } }
+        margin-top: 0.2em; } }
   @media (min-width: 768px) {
     #list-item .countrytime {
       padding-left: 1.25rem; } }
@@ -2452,31 +2456,38 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     line-height: 1;
     margin-top: .15rem;
     width: 40px;
-    height: 40px; }
+    height: 40px;
+    font-size: 0.9rem; }
   #list-item .time {
     position: relative;
     margin-top: .55rem;
-    font-size: 1rem;
     line-height: 1.8;
-    padding: 0 1.5rem; }
+    padding: 0 1.5rem;
+    font-size: 0.9rem; }
   @media (min-width: 768px) {
     #list-item .host {
       padding-right: 0; } }
+  #list-item .host p {
+    font-size: 0.9rem; }
   #list-item .host .name {
     display: inline-block;
     width: auto;
     line-height: 1.5;
-    font-size: 1.88rem; }
+    font-size: 1.18rem;
+    color: #40486B;
+    margin-top: 8px; }
     @media (min-width: 768px) {
       #list-item .host .name {
         display: block; } }
-  #list-item .host .mobile-language p {
-    color: #091344;
-    font-size: .85em; }
+  #list-item .host .mobile-language {
+    margin: .5rem 0 .1rem; }
+    #list-item .host .mobile-language p {
+      color: #091344;
+      font-size: .85em; }
   #list-item .host p {
     display: inline-block; }
     #list-item .host p.city {
-      color: #363636; }
+      color: #40486B; }
       #list-item .host p.city:before {
         content: ", ";
         position: relative;
@@ -2503,12 +2514,14 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   @media (min-width: 768px) {
     #list-item .eventtitle {
       padding-left: 1.8rem; } }
+  #list-item .eventtitle p {
+    margin-top: 8px; }
   @media (min-width: 768px) {
     #list-item .description {
       padding-left: .5rem;
-      margin-top: .35rem; } }
+      margin-top: .275rem; } }
   #list-item .description p {
-    font-size: 1.1rem; }
+    font-size: 0.9rem; }
   #list-item.is-live .country, #list-item.is-live .time {
     border-color: #091344 !important;
     color: #091344; }
@@ -2544,7 +2557,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     position: relative;
     bottom: -.5rem; }
   #list-item .btn.category {
-    margin: .5rem .25rem; }
+    margin: .5rem 0 .5rem -.1rem; }
 
 .search-btn {
   color: #091344;
@@ -2684,15 +2697,16 @@ a.has-text-danger:hover, a.has-text-danger:focus {
       font-weight: 300;
       -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: #091344; }
-    .marquee.listing span {
-      border-bottom: 2px solid white; }
     .marquee.listing.live {
       background: #e60000; }
+      .marquee.listing.live:hover span {
+        color: white; }
       .marquee.listing.live span, .marquee.listing.live a {
-        -webkit-text-stroke-width: 0; }
+        color: transparent;
+        -webkit-text-stroke-color: white; }
   .marquee p {
     font-size: .9rem !important;
-    color: #0a0a0a; }
+    color: #40486B; }
   .marquee.invert {
     background: #091344; }
     .marquee.invert span {
@@ -2724,6 +2738,7 @@ a.has-text-danger:hover, a.has-text-danger:focus {
     font-size: 1rem;
     padding: .5rem 0;
     display: block;
+    margin-bottom: .25rem;
     box-shadow: none;
     width: 100%;
     -webkit-appearance: none;

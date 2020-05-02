@@ -24,6 +24,7 @@
   color: $white;
   display: inline-block;
   padding: .2rem .75rem;
+  font-size: $theme-size-2;
   @include rounded;
   @include transform(background, 200ms);
   &:hover {
@@ -121,11 +122,13 @@
   }
   .eventtitle {
     margin-bottom: .5rem;
-    line-height: 1.5;
+    line-height: 1.4;
     > p > span {
-      line-height: 1.5;
+      line-height: 1.2;
       font-size: $theme-size-1;
-      padding-bottom: 0rem;
+      padding-bottom: 0;
+      display: inline-block;
+      margin: 4px 0 5px;
       border-bottom: 1px solid rgba(lighten($grey-dark, 20%),0.5);
       @include transform(all, 250ms);
       &:hover {
@@ -137,7 +140,6 @@
   .country, .time {
     border: 1px solid $primary;
     color: $primary;
-    // font-family: $title-family;
     @include rounded;
     text-align: center;
     position: relative;
@@ -156,8 +158,9 @@
     margin-top: .75rem;
     @media(min-width: 768px) {
       text-align: center;
-      margin-top: 0;
+      margin-top: 0.2em;
     }
+    font-size: $theme-size-2;
   }
   .countrytime {
     @media(min-width: 768px) {
@@ -170,17 +173,21 @@
     margin-top: .15rem;
     width: 40px;
     height: 40px;
+    font-size: $theme-size-2;
   }
   .time {
     position: relative;
     margin-top: .55rem;
-    font-size: 1rem;
     line-height: 1.8;
     padding: 0 1.5rem;
+    font-size: $theme-size-2;
   }
   .host {
     @media (min-width: 768px) {
       padding-right: 0;
+    }
+    p {
+      font-size: $theme-size-2;
     }
     .name {
       display: inline-block;
@@ -190,8 +197,11 @@
       width: auto;
       line-height: 1.5;
       font-size: $theme-size-1;
+      color: #40486B;
+      margin-top: 8px;
     }
     .mobile-language {
+      margin: .5rem 0 .1rem;
       p {
         color: $primary;
         font-size: .85em;
@@ -200,7 +210,7 @@
     p {
       display: inline-block;
       &.city {
-        color: #363636;
+        color: #40486B;
         &:before {
           content: ", ";
           position: relative;
@@ -231,11 +241,14 @@
     @media (min-width: 768px) {
       padding-left: 1.8rem;
     }
+    p {
+      margin-top: 8px;
+    }
   }
   .description {
     @media (min-width: 768px) {
       padding-left: .5rem;
-      margin-top: .35rem;
+      margin-top: .275rem;
     }
     p {
       font-size: $theme-size-2;
@@ -284,7 +297,7 @@
   }
   .btn {
     &.category {
-      margin: .5rem .25rem;
+      margin: .5rem 0 .5rem -.1rem;
     }
   }
 }
@@ -436,20 +449,23 @@
       -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: $primary;
     }
-    span {
-      border-bottom: 2px solid $white;
-    }
     &.live {
       background: $red;
+      &:hover {
+        span {
+          color: $white;
+        }
+      }
       span, a {
-        -webkit-text-stroke-width: 0;
+        color: transparent;
+        -webkit-text-stroke-color: $white;
       }
     }
   }
 
   p {
     font-size: .9rem !important;
-    color: $black;
+    color: #40486B;
   }
   &.invert {
     background: $primary;
@@ -489,6 +505,7 @@
     font-size: 1rem;
     padding: .5rem 0;
     display: block;
+    margin-bottom: .25rem;
     @media (min-width: 768px) {
       margin-bottom: 1rem;
     }

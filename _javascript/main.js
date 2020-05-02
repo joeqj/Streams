@@ -1,9 +1,10 @@
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('What u doing looking here');
+// require("moment");
+// require("jquery-timepicker");
+
+$(window).on('load', function () {
   $("#main-marquee").marquee({
     duration: 15000,
     gap: 12,
-    delayBeforeStart: 0,
     direction: 'left',
     duplicated: true,
     startVisible: true
@@ -21,6 +22,7 @@ var infoOpen = false;
 var isMobile = false;
 var lastScroll = 0;
 var nextPage = 2;
+var prevPage = 1;
 var isRan = false;
 var isSearch = false;
 
@@ -80,13 +82,36 @@ function loadMoreStreams(today, ajaxurl) {
       success : function(response) {
         nextPage++;
         $('#upcoming-posts').append(response);
-        revealPosts(250);
+        revealMorePosts(250);
       }
     });
   }
 }
 
-function revealPosts(time) {
+function loadLessStreams(today, ajaxurl) {
+  if(isSearch === false && isRan === false) {
+    isRan = true;
+    $.ajax({
+      url : ajaxurl,
+      type : 'post',
+      data : {
+        page : prevPage,
+        today : today,
+        action : 'load_less_streams'
+      },
+      error : function(response) {
+        console.warn(response);
+      },
+      success : function(response) {
+        prevPage++;
+        $('#upcoming-posts').prepend(response);
+        revealLessPosts(150);
+      }
+    });
+  }
+}
+
+function revealMorePosts(time) {
   var posts = $("#list-item:not(.reveal)");
   var i = 0;
   setInterval(function() {
@@ -94,6 +119,18 @@ function revealPosts(time) {
     var el = posts[i];
     $(el).addClass("reveal");
     i++;
+  }, time);
+  isRan = false;
+}
+
+function revealLessPosts(time) {
+  var posts = $("#list-item:not(.reveal)");
+  var i = posts.length;
+  setInterval(function() {
+    if (i < 0) return false;
+    var el = posts[i];
+    $(el).addClass("reveal");
+    i--;
   }, time);
   isRan = false;
 }
@@ -305,21 +342,21 @@ $(document).keydown(function(e) {
 });
 
 // --- FUNCTIONS ---
-// function listItemUrlBanner(event, that, uid, url, source) {
-//   var banner = $(that).find(".url-banner");
-//   var marqueeId = "list-marquee" + uid;
-//   var marqueeEl;
-//   if(event.type == "mouseenter") {
-//     banner.html('<div id="list-marquee' + uid + ' class="marquee listing active"><span>*** Watch Now On ' + source + '&nbsp;</span></div>');
-//     banner.slideDown(200);
-//     marqueeEl = new Marquee(marqueeId, { direction: 'ltr', speed: 0.2, offset: '400px' });
-//   } else {
-//     banner.slideUp(200, function() {
-//       banner.html("");
-//     });
-//     marqueeEl = null;
-//   }
-// }
+function listItemUrlBanner(event, that, uid, url, source) {
+  var banner = $(that).find(".url-banner");
+  var marqueeId = "list-marquee" + uid;
+  var marqueeEl;
+  if(event.type == "mouseenter") {
+    banner.html('<div id="list-marquee' + uid + ' class="marquee listing active"><span>*** Watch Now On ' + source + '&nbsp;</span></div>');
+    banner.slideDown(200);
+    marqueeEl = new Marquee(marqueeId, { direction: 'ltr', speed: 0.2, offset: '400px' });
+  } else {
+    banner.slideUp(200, function() {
+      banner.html("");
+    });
+    marqueeEl = null;
+  }
+}
 
 function toggleCreateListing(state) {
   formOpen = !formOpen;

@@ -43,8 +43,13 @@
 <script type="text/javascript">
   $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-      loadMoreStreams("<?php date('Ymd') ?>", "<?php echo admin_url('admin-ajax.php') ?>");
+      loadMoreStreams("<?php date('Y-m-d') ?>", "<?php echo admin_url('admin-ajax.php') ?>");
     }
+    setTimeout(function() {
+      if($(window).scrollTop() < 150) {
+        loadLessStreams("<?php date('Y-m-d H:i', time() - 86400) ?>", "<?php echo admin_url('admin-ajax.php') ?>");
+      }
+    }, 2500);
   });
 </script>
 </body>

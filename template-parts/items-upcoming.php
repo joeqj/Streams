@@ -62,7 +62,7 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
               <span class="time" id="js-time-<?php the_ID(); ?>"></span>
             </div>
             <div class="column is-4-mobile date is-visible-mobile is-hidden-tablet">
-              <p class="mt-2"><?php echo $date[0]; echo "/"; echo $date[1] ?></p>
+              <p class="mt-2"><span id="js-date-mobile-<?php the_ID(); ?>"></span></p>
             </div>
           </div>
         </div>
@@ -115,13 +115,16 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
     var local<?php the_ID(); ?> = moment.utc(timestamp<?php the_ID(); ?>).local().format('YYYY-MM-DD HH:mm');
     var d<?php the_ID(); ?> = new Date(local<?php the_ID(); ?>);
     var date<?php the_ID(); ?> = moment(d<?php the_ID(); ?>).format("DD-MMM");
+    var dateString<?php the_ID(); ?> = String(date<?php the_ID(); ?>);
 
     var s<?php the_ID(); ?> = d<?php the_ID(); ?>.toLocaleTimeString();
     var t<?php the_ID(); ?> = s<?php the_ID(); ?>.split(":");
     var time<?php the_ID(); ?> = t<?php the_ID(); ?>[0] + ":" + t<?php the_ID(); ?>[1];
+    var timeString<?php the_ID(); ?> = String(time<?php the_ID(); ?>);
 
-    $("#js-date-<?php the_ID(); ?>").html(date<?php the_ID(); ?>);
-    $("#js-time-<?php the_ID(); ?>").html(time<?php the_ID(); ?>);
+    $("#js-date-<?php the_ID(); ?>").html(dateString<?php the_ID(); ?>);
+    $("#js-date-mobile-<?php the_ID(); ?>").html(dateString<?php the_ID(); ?>);
+    $("#js-time-<?php the_ID(); ?>").html(timeString<?php the_ID(); ?>);
 
     var localDate<?php the_ID(); ?> = new moment().format("YYYY-MM-DD HH");
     var serverDate<?php the_ID(); ?> = new moment(local<?php the_ID(); ?>).format("YYYY-MM-DD HH");
@@ -132,30 +135,30 @@ $calendarString = '?action=TEMPLATE&text='.$title.'&dates='.$calendarDate[0].'T'
     if (localDate<?php the_ID(); ?> > serverDate<?php the_ID(); ?>) {
       $("#list-item.<?php the_ID(); ?>").addClass("archive");
     }
+  </script>
 
+  <script type="text/javascript">
     $('.<?php the_ID(); ?>').on("click", function(e) {
       var that = $(this);
       var banner = $(this).find(".url-banner");
       var marquee = $("#list-marquee<?php the_ID(); ?>");
       if (!banner.hasClass("open")) {
         banner.addClass("open");
-        if (that.hasClass("is-live")) {
+        if (that.hasClass("is-live") || that.hasClass("archive")) {
           marquee.addClass("live");
-          marquee.html('<a href="<?php echo $url ?>"><span>LIVE!!! ~ WATCH NOW ~ !!!</span> *** <span>ON<?php echo $source ?></span></a>');
-        } else if (that.hasClass("archive")) {
-          marquee.addClass("live");
-          marquee.html('<a href="<?php echo $url ?>"><span>LIVE!!! ~ WATCH NOW ~ !!!</span> *** <span>ON<?php echo $source ?></span></a>');
+          marquee.html('<a href="<?php echo $url ?>" target="_blank"><span>LIVE!!! ~ WATCH NOW ~ !!! *** ON<?php echo $source ?> LIVE!!! ~ WATCH NOW ~ !!! *** ON<?php echo $source ?></span></a>');
         } else {
-          marquee.html('<a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank">*** <span>DON’T MISS THIS! ~ </span> </a><a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank"><span>ADD TO CALENDAR</span></a>');
+          marquee.html('<a href="https://www.google.com/calendar/render<?php echo $calendarString ?>" target="_blank">*** <span>DON’T MISS THIS! ~ ADD TO CALENDAR</span></a>');
         }
-        banner.slideDown(200);
-        $(marquee).marquee({
-          duration: 12000,
-          gap: 12,
-          delayBeforeStart: 0,
-          direction: 'right',
-          duplicated: true,
-          startVisible: true
+        banner.slideDown(200, function() {
+          $(marquee).marquee({
+            duration: 12000,
+            gap: 25,
+            delayBeforeStart: 50,
+            direction: 'right',
+            duplicated: true,
+            startVisible: true
+          });
         });
       } else {
         banner.removeClass("open");
